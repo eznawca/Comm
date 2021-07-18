@@ -6,7 +6,6 @@
 		"role": "Developer",
 		"homepage": "https://eznawca.pl"
 	 }],
-	"version": "0.1.1",
 	"license": "MIT",
 	"description": "Multi-Tool library",
 	"keywords": ["tool", "multitool", "multi", "library", "eznawca", "lekcjephp"],
