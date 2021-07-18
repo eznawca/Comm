@@ -1,0 +1,29 @@
+# IDE files
+.idea/
+.vscode/
+# Plugin IDE files
+.prettierrc
+# Meta project files
+.meta/
+# Composer
+composer.phar
+vendor/
+# Config secret file
+.env
+# System file
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+.DS_Store
+# Paint Shop Pro Images
+Corel Auto-Preserve/
+# Bin big files
+*.bak
+*.dll
+*.exe
+*.mp4
+*.mpeg
+*.pspimage
+*.rar
+*.zip
+*.psd

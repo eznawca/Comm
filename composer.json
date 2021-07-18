@@ -1,0 +1,28 @@
+{
+	"name": "eznawca/comm",
+	 "authors": [{
+		"name": "Andrzej Mazur",
+		"email": "eznawca@gmail.com",
+		"role": "Developer",
+		"homepage": "https://eznawca.pl"
+	 }],
+	"version": "0.1.1",
+	"license": "gpl",
+	"description": "Multi-Tool library",
+	"keywords": ["tool", "multitool", "multi", "library", "eznawca", "lekcjephp"],
+	"type": "library",
+	"homepage": "https://eznawca.pl",
+	"minimum-stability": "beta",
+	"require": {
+		"php": "^7.4",
+		"ext-mbstring": "*",
+		"ext-zlib": "*",
+		"ext-json": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Eznawca\\Comm\\": "lib/"
+		},
+		"files": ["lib/global_functions.php"]
+	}
+}
