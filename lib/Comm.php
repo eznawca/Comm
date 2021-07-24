@@ -539,7 +539,7 @@ class Comm
 	 * Sprawdza zawieranie się igły w kolejnych stringach tablicy-haystack
 	 * i zwraca nr komórki gdy needle zawiera sie w komórce lub false gdy nie znajdzie
 	 */
-	function in_arraypos($needle, $haystack)
+	public static function in_arraypos(string $needle, array $haystack)
 	{
 		foreach ($haystack as $inx => $val) {
 			if (strpos($val, $needle) !== false) return $inx;
