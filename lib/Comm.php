@@ -47,8 +47,8 @@ class Comm
 	const DOMAIN10MIN = ['@a.com', '@aa.com', '@aa.pl', '@aaa.com', '@aaa.pl', '@aaaa.com', '@aaaa.pl', '@co.pl', '@x.com', '@x.pl', '@xx.com', '@xx.pl', '@xxx.com', '@xxx.pl', '@abc.com', '@abc.pl', '@abc123.com', '@abc123.pl', '@0clickemail.com', '@10minmail.com', '@10minut.xyz', '@10minutemail.co.za', '@10minutemail.com', '@10minutemail.davidxia.com', '@10minutemail.pl', '@10minutmail.pl', '@12minutemail.com', '@20minutemail.com', '@20minutemail.it', '@2mailcloud.com', '@4strefa.pl', '@7tags.com', '@99experts.com', '@a.pl', '@anonbox.net', '@anonmails.de', '@anontext.com', '@anonymbox.com', '@anonymous-email.net', '@anonymousemail.in', '@armyspy.com', '@arss.me', '@asdf.pl', '@auoie.com', '@badcomp.ovh', '@bambase.com', '@bareed.ws', '@besttempmail.com', '@binkmail.com', '@biyac.com', '@blockfilter.com', '@bobmail.info', '@bugmenot.com', '@buppel.com', '@burnermail.io', '@bylup.com', '@cellurl.com', '@ch.mintemail.com', '@chammy.info', '@chapedia.net', '@chapedia.org', '@chasefreedomactivate.com', '@coieo.com', '@cool.fr.nf', '@courriel.fr.nf', '@crazymail.guru', '@cuoly.com', '@cuvox.de', '@dayrep.com', '@deadaddress.com', '@dealja.com', '@devnullmail.com', '@dingbone.com', '@disbox.net', '@disbox.org', '@disposeamail.com', '@dispostable.com', '@dodgeit.com', '@dodgemail.de', '@domain.local', '@drdrb.com', '@drdrb.net', '@dwgtcm.com', '@eanok.com', '@ehaker.pl', '@einrot.com', '@emailondeck.com', '@emailsensei.com', '@emlpro.com', '@enayu.com', '@eoopy.com', '@fake-box.com', '@fakeinbox.com', '@fleckens.hu', '@fudgerub.com', '@getairmail.com', '@getnada.com', '@golfilla.info', '@gotcertify.com', '@grr.la', '@guerrillamail.biz', '@guerrillamail.com', '@guerrillamail.de', '@guerrillamail.info', '@guerrillamail.net', '@guerrillamail.org', '@guerrillamailblock.com', '@gustr.com', '@gxmer.com', '@htl22.at', '@ilvain.com', '@imgv.de', '@in-addr.arpa', '@incognitomail.com', '@ipsite.org', '@irankingi.pl', '@jadamspam.pl', '@jetable.fr.nf', '@jetable.org', '@jnxjn.com', '@jourrapide.com', '@kindbest.com', '@kisan.org', '@klzlk.com', '@koszmail.pl', '@ktumail.com', '@kuntul.buzz', '@kurzepost.de', '@lawlita.com', '@lite14.us', '@lookugly.com', '@lroid.com', '@luxusmail.gq', '@lykamspam.pl', '@mail.tm', '@mailcatch.com', '@mailcker.com', '@maildrop.cc', '@maileater.com', '@mailexpire.com', '@mailforspam.com', '@mailin8r.com', '@mailinater.com', '@mailinator.com', '@mailinator.net', '@mailinator2.com', '@mailmetrash.com', '@mailpoof.com', '@manybrain.com', '@manyfeed.com', '@meantinc.com', '@memsg.top', '@mepost.pw', '@mhzayt.online', '@mintemail.com', '@misterpinball.de', '@moakt.cc', '@moakt.co', '@moakt.ws', '@moncourrier.fr.nf', '@monemail.fr.nf', '@monmail.fr.nf', '@montokop.pw', '@mt2009.com', '@mt2014.com', '@my10minutemail.com', '@mytemp.email', '@mytempemail.com', '@mytrashmail.com', '@nepwk.com', '@net2mail.top', '@netmovies.pl', '@netveplay.com', '@nicoric.com', '@no-mail.pl', '@noclickemail.com', '@nomail.xl.cx', '@nospam.ze.tc', '@objectmail.com', '@oduyzrp.com', '@opentrash.com', '@owlymail.com', '@pecdo.com', '@poczter.eu', '@pokemail.net', '@pookmail.com', '@powerencry.com', '@proxymail.eu', '@putthisinyourspamdatabase.com', '@rcpt.at', '@re-gister.com', '@revengemail.com', '@rhyta.com', '@ricrk.com', '@rmqkr.net', '@roithsai.com', '@rtrtr.com', '@sadd.us', '@safetymail.info', '@send-email.org', '@sendanonymousemail.net', '@sendemail.pl', '@sharklasers.com', '@silentsender.com', '@smashmail.de', '@smellfear.com', '@sogetthis.com', '@soisz.com', '@spam.la', '@spam4.me', '@spamavert.com', '@spambox.us', '@spamcero.com', '@spamex.com', '@spamfree24.org', '@spamgoes.in', '@spamgourmet.com', '@spamherelots.com', '@spamhereplease.com', '@speed.1s.fr', '@spoofmail.de', '@suioe.com', '@superplatyna.com', '@superrito.com', '@suremail.info', '@surfdoctorfuerteventura.com', '@svenz.eu', '@tagyourself.com', '@tajny.net', '@talkinator.com', '@teleworm.us', '@temp-mail.org', '@tempemail.net', '@tempinbox.com', '@tempomail.fr', '@temporary-mail.net', '@temporaryinbox.com', '@texasaol.com', '@thankyou2010.com', '@theasciichart.com', '@thisisnotmyrealemail.com', '@thtt.us', '@tmail.ws', '@tmailinator.com', '@tmails.net', '@tmpbox.net', '@tmpmail.net', '@tmpmail.org', '@tokenmail.de', '@tradermail.info', '@trash-mail.at', '@trash-mail.com', '@trash-me.com', '@trash2009.com', '@trashmail.at', '@trashmail.com', '@trashmail.me', '@trashmail.net', '@trashymail.com', '@trbvm.com', '@trillianpro.com', '@truthfinderlogin.com', '@tyldd.com', '@tymczasowy.com', '@urhen.com', '@uroid.com', '@venompen.com', '@verifiedidentity.com', '@vztc.com', '@waroengdo.store', '@webarnak.fr.eu.org', '@wegwerfmail.de', '@wegwerfmail.net', '@wegwerfmail.org', '@wellsfargocomcardholders.com', '@wimsg.com', '@wwwnew.eu', '@xasqvz.com', '@xufcopied.com', '@yopamail.pl', '@yopmail.com', '@yopmail.fr', '@yopmail.net', '@you-spam.com', '@yuoia.com', '@zcai66.com', '@zefara.com', '@zeroe.ml', '@zetmail.com', '@zik.dj', '@zippymail.info', '@zoaxe.com', '@zwoho.com',];
 
 	/**
-	 * Włącza tryb pracy lokalnej gdzie wyświetlane są wszystkie błędy i wydłużany czas pracy skryptu
-	 * @param bool $force Wymuś wyświetlanie błędów niezaleznie od trybu lokalnie czy produkcyjnie/online
+	 * Enables local mode where all errors are displayed and extended script runtime
+	 * @param bool $force Force error display regardless of local or production/online-mode
 	 */
 	public static function toggleErrorDisplay(bool $force = false)
 	{
@@ -68,26 +68,28 @@ class Comm
 	}
 
 	/**
-	 * Funkcja do Debagowania
-	 * @param $value - zmienna do wyświetlenia
-	 * @param string $name - Dodatkowa nazwa opis wyświetlanych danych
+	 * Debug Function
+	 * @param mixed $value test variable
+	 * @param string $title Additional name describing the displayed data
+	 * @param bool $return If you would like to capture the output of r(), use the return parameter. When this parameter is set to true, r() will return the information rather than print it.
+	 * @param bool $force_production Forces data display also in production mode/online-mode
 	 */
-	public static function r($value, $title = '', $return = false, $print_prod = false)
+	public static function r($value, string $title = '', bool $return = false, bool $force_production = false)
 	{
-		if (!(SERVER_LOCAL or $print_prod)) return;    // W trybie publicznym nic nie wyświetlamy
+		if (!(SERVER_LOCAL OR $force_production)) return null;    // In public mode it displays nothing
 
 		if (is_null($value)) {
-			$head = '[Wartość NULL]';
+			$head = '[NULL value]';
 			$value = '';
 		} elseif ($value === false) {
 			$head = '[Bool===]';
-			$value = ('---FALSE-NIE');
+			$value = ('---FALSE-NO');
 		} elseif ($value === true) {
 			$head = '[Bool===]';
-			$value = ('---TRUE-TAK');
+			$value = ('---TRUE-YES');
 		} elseif (is_bool($value)) {
 			$head = '[Bool]';
-			$value = (($value) ? '--TRUE-TAK' : '--FALSE-NIE');
+			$value = (($value) ? '--TRUE-YES' : '--FALSE-NO');
 		} elseif (is_array($value)) {
 			$head = '[array::count('.count($value).')]';
 			$value = print_r($value, 1);
@@ -99,13 +101,13 @@ class Comm
 		} elseif (is_string($value)) {
 			$strlen = strlen($value);
 			if ($value == '') {
-				$head = '[String PUSTY]: ';
+				$head = '[Empty String]: ';
 			} elseif ($value === ' ') {
-				$head = '[String Jedna spacja]: ';
+				$head = '[String One space]: ';
 			} elseif (is_numeric($value)) {
-				$head = '[String Numeryczny, długość: '.$strlen.']: ';
+				$head = '[String Numeric, length: '.$strlen.']: ';
 			} else {
-				$head = '[String, długość: '.$strlen.']: ';
+				$head = '[String, length: '.$strlen.']: ';
 			}
 		} elseif (is_int($value)) {
 			$head = '[Integer]: ';
@@ -139,14 +141,21 @@ class Comm
 		}
 	}
 
-	public static function rb($value, $title = '', $return = false, $print_prod = false)
+	/**
+	 * Debug Function and terminates execution of the script.
+	 * @param mixed $value test variable
+	 * @param string $title Additional name describing the displayed data
+	 * @param bool $return If you would like to capture the output of r(), use the return parameter. When this parameter is set to true, r() will return the information rather than print it.
+	 * @param bool $force_production Forces data display also in production mode/online-mode
+	 */
+	public static function rb($value, string $title = '', bool $return = false, bool $force_production = false)
 	{
-		self::r($value, $title, $return, $print_prod);
-		if (SERVER_LOCAL or $print_prod) exit;
+		self::r($value, $title, $return, $force_production);
+		if (SERVER_LOCAL OR $force_production) exit;
 	}
 
 	/**
-	 * Konwertuje tablice dowolnie wymiarową na zagłębiony object typu stdClass
+	 * Converts arrays of arbitrary dimensions to an embedded object of type stdClass
 	 * @param array $array
 	 * @return object stdClass
 	 */
@@ -163,12 +172,11 @@ class Comm
 	}
 
 	/**
-	 * Inteligentnie skraca nazwy plików i ewentualnie długich adresów url
-	 * wycinając środek a początek i środek + roszerzenie
-	 * @param int $max_len - maksymalna długość pliku bez korekty
-	 * @param int $max_len_ext - maksymalna dlugość rozszerzenia - false = bez zmian
-	 * @param int $len_part - dlugośc fragmentów z nazwy z których skłąda się plik: $len_part+1+$len_part
-	 * @param string $hellip ciąg łączący
+	 * Intelligently shortens filenames or long URLs by cutting center and beginning and middle + extension
+	 * @param int $max_len - maximum file length without correction
+	 * @param int $max_len_ext - maximum extension length - false = no change
+	 * @param int $len_part - length of fragments from the name of which the file consists of: $len_part+1+$len_part
+	 * @param string $hellip sticky string
 	 * @return string
 	 */
 	public static function str_short_file($s, $max_len = 16, $max_len_ext = false, $len_part = false, $hellip = '&hellip;')
@@ -189,11 +197,10 @@ class Comm
 	}
 
 	/**
-	 * Inteligentnie skraca nazwy/adresy/emaile
-	 * wycinając środek a początek i środek
-	 * @param int $max_len - maksymalna długość pliku bez korekty
-	 * @param string $hellip ciąg łączący
-	 * @param bool inside - wycina fragment ze środka
+	 * Intelligently truncates names / addresses / emails by cutting the middle or the end
+	 * @param int $max_len - Maksymalna długość pliku bez korekty
+	 * @param string $hellip sticky string
+	 * @param bool inside - if true cuts the section out of the center
 	 * @return array
 	 */
 	public static function str_short_name($s, $max_len, $inside = true, $hellip = '&hellip;')
@@ -215,10 +222,9 @@ class Comm
 	}
 
 	/**
-	 * Ustawia najwyższe mozliwe prawa do pliku w systemie Unix,
-	 * jesli to niemożliwe ustawia słabsze aż do 0660
-	 * @param $path - ściezka do pliku
-	 * @return bool - false jesli nie udało się ustawić choć 0660
+	 * Set the highest possible file permissions on Unix. If that's impossible it gets weaker and weaker until 0660
+	 * @param $path - file path
+	 * @return bool - false if at least 0660 could not be set
 	 */
 	public static function chmod_max($path): bool
 	{
@@ -237,7 +243,7 @@ class Comm
 	}
 
 	/**
-	 * Analogiczna do str_rot13 ale rotuje znaki od 33 do 128
+	 * Same as str_rot13 but rotates characters 33 through 128
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -247,7 +253,7 @@ class Comm
 	}
 
 	/**
-	 * Analogiczna do str_rot13 ale rotuje także cyfry
+	 * Same as str_rot13 but also rotates digits
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -257,7 +263,7 @@ class Comm
 	}
 
 	/**
-	 * Koduje jak base64_encode() z modyfikacją że nadaje się na parametr w URLu
+	 * Encode like base64_encode() with a modification that It is suitable for a parameter in a URL
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -267,7 +273,7 @@ class Comm
 	}
 
 	/**
-	 * Odkodowuje base64_encode_url()
+	 * Decode base64_encode_url()
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -277,7 +283,7 @@ class Comm
 	}
 
 	/**
-	 * Kodowanie dwukierunkowe nietrywialne
+	 * Non-trivial bidirectional encoding
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -287,7 +293,7 @@ class Comm
 	}
 
 	/**
-	 * Odkodowanie encode() z kodowania dwukierunkowego nietrywialnego
+	 * Encode Self::encode() from non-trivial bidirectional encoding
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
@@ -298,8 +304,8 @@ class Comm
 	}
 
 	/**
-	 * Zapisuje wskazany czas w postaci ludzkiego języka na wzór jak to pokazuje FB
-	 * UWAGA: Zle obsługuje przyszłe daty
+	 * It records the indicated time in the form of human language as shown by FB
+	 * NOTE: Wrong handling of future dates
 	 * @param $t0 int - czas do ukazania
 	 * @return string modified output string
 	 */
@@ -382,7 +388,7 @@ class Comm
 	}
 
 	/**
-	 * Zwraca IP klienta
+	 * Returns the client's IP
 	 * @return string output IP4
 	 */
 	public static function remote_ip()
@@ -523,11 +529,12 @@ class Comm
 	}
 
 	/**
-	 * Zwraca true gdy wyraz napisany jest w całości wielkimi literami
-	 * pomija w badaniu inne znaki niż litery alfabetu.
-	 * Stara nazwa: is_wersaliki()
+	 * Returns true if the word is fully uppercase omits non-alphabetic characters from testing.
+	 * Old name: is_wersaliki()
+	 * @param string $s input string being tested
+	 * @return bool
 	 */
-	public static function is_uppercase($s)
+	public static function is_uppercase($s): bool
 	{
 		$s = trim($s);
 		if (is_numeric($s)) return false;
@@ -536,8 +543,11 @@ class Comm
 	}
 
 	/**
-	 * Sprawdza zawieranie się igły w kolejnych stringach tablicy-haystack
-	 * i zwraca nr komórki gdy needle zawiera sie w komórce lub false gdy nie znajdzie
+	 * Checks the presence of the needle in successive elements of the haystack array
+	 * and returns the cell key if needle is in the cell, or false if it is not found
+	 * @param string $needle search string
+	 * @param array $haystack array of strings
+	 * @return false|mixed
 	 */
 	public static function in_arraypos(string $needle, array $haystack)
 	{
@@ -548,8 +558,8 @@ class Comm
 	}
 
 	/**
-	 * Generuje ciąg znakuw nadający się na hasło
-	 * @param $len - długość hasła
+	 * Generates a string suitable for a password
+	 * @param $len - password length
 	 * @param $polish_human - buduje hasło z polskich słów przymiotnikaRzeczownikaSymbolNr
 	 */
 	public static function passwd_random($polish_human = false): string
@@ -790,9 +800,9 @@ class Comm
 	}
 
 	/**
-	 * Podświetla wyszukiwane ciągi - case-insensitive accent-insensitive - moie zważa na wielkość znaków jak i na znaki akcentowane
-	 * Wersja dokładna nie zmienia wielkości znaków w tekście wynikowym, zato ciąg wyszukiwania możemy podawać wielkimi i małymi znakami
-	 * uzywająć znaków diakretycznych i innych akcentoweanych nawet jesli one w tekście nie występują ale sa podobne do znaków latin
+	 * Podświetla wyszukiwane ciągi - case-insensitive accent-insensitive - nie zważa na wielkość znaków jak i na znaki akcentowane
+	 * Wersja dokładna nie zmienia wielkości znaków w tekście wynikowym, za to ciąg wyszukiwania możemy podawać wielkimi i małymi znakami
+	 * używają znaków diakrytycznych i innych akcentowanych nawet jeśli one w tekście nie występują ale sa podobne do znaków latin
 	 * @param $search - ciąg wyszukiwania
 	 * @param $text - ciąg wyświetlany
 	 */
@@ -862,7 +872,7 @@ class Comm
 	}
 
 	/**
-	 * Generuje specjalny timestamp do rozpoznawania spamów z formularzy
+	 * Generates a special timestamp for recognizing spam from forms
 	 * @return string hash_time(7)+time o podstawie 36
 	 */
 	public static function magicstr_gen()
@@ -875,10 +885,11 @@ class Comm
 	}
 
 	/**
-	 * Sprawdza poprawność specjalnego timestamp z hash_time(7)+time36 - służcy do rozpoznawania spamów na formularze
-	 * jeśli odczytany time nie zgadza się z jego hashem lub format czasu jest błędny to kod zwraca false,
-	 * jeśli odczytany time nie mieśli się w pomiędzy min i max zwraca false,
-	 * jeśli Ok zwraca roznicę czasu (deltatime) pomiędzy czasem z formularza a bierzącym
+	 *
+	 * Validates a special timestamp hash_time(7)+time36 for recognizing spam on forms
+	 * if the read time does not match its hash or the time format is wrong, it returns false!
+	 * if the readout time is not between min and max it return false!
+	 * if Ok returns the time difference (delta time) between the form time and the current time
 	 */
 	public static function magicstr_test($magic, $time_min = self::MAGICSTR_MINTIME, $time_max = self::MAGICSTR_MAXTIME)
 	{
