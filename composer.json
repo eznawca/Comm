@@ -11,7 +11,6 @@
 	"keywords": ["tool", "multitool", "multi", "library", "eznawca", "lekcjephp"],
 	"type": "library",
 	"homepage": "https://eznawca.pl",
-	"minimum-stability": "beta",
 	"require": {
 		"php": "^7.4",
 		"ext-mbstring": "*",
