@@ -1,11 +1,11 @@
 <?php
 /**
  * @author Andrzej Mazur <andrzej@eznawca.pl>
- * @version 1.0
- *
  */
 
 namespace Eznawca\Comm;
+
+use stdClass;
 
 define('REQUEST_HTTPS', !empty($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] !== 'off'));
 define('REQUEST_SCHEME', REQUEST_HTTPS ? 'https' : 'http');
@@ -120,7 +120,7 @@ class Comm
 			$head = 'gettype('.gettype($value).')';
 			$value = print_r($value, 1);
 		}
-		// Print do consoli
+		// Print to console
 		echo '<script>console.info("PHP: `'.$title.'`");console.log("'.(trim($json_val??$value, '"')).'");</script>';
 
 		$value = strtr($value, ['>' => '&gt;', '<' => '&lt;']);
@@ -913,7 +913,7 @@ class Comm
 
 	/**
 	 * Generuje zakodowany ciąg z zawartością $body i hash do weryfikacji poprawności
-	 * Uzywany np. do autologowania
+	 * Używany np. do autologowania
 	 */
 	public static function strhash_gen($body, $salt = self::SALT_STRHASH)
 	{
