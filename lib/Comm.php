@@ -161,7 +161,7 @@ class Comm
 	 */
 	public static function convertToObject($array)
 	{
-		$object = new StdClass();
+		$object = new stdClass();
 		foreach ($array as $key => $value) {
 			if (is_array($value)) {
 				$value = self::convertToObject($value);
