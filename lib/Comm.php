@@ -912,14 +912,14 @@ class Comm
 	}
 
 	/**
-	 * Sprawdza poprawność zmiennej Referrer czy Host z referrera jest taki sam jak aktualny host
-	 * host urla musi być taki sama jak host refererra
+	 * Validates the referrer variable. Compares the host address with a reference variable. If the domain/host in both addresses are identical returns true
 	 */
-	public static function referrer_test()
+	public static function referer_test()
 	{
-		$parse_host = parse_url($_SERVER['HTTP_HOST']);
+		if (empty($_SERVER['HTTP_REFERER'])) return false;
+		$parse_host = parse_url('//'.$_SERVER['HTTP_HOST']);
 		$parse_referer = parse_url($_SERVER['HTTP_REFERER']);
-		return ($parse_referer['host'] == $parse_host['host']);
+		return ($parse_host['host'] == $parse_referer['host']);
 	}
 
 	/**
