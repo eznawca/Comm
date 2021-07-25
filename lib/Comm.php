@@ -100,14 +100,16 @@ class Comm
 			$json_val = json_encode($value);
 		} elseif (is_string($value)) {
 			$strlen = strlen($value);
+			$strlen_mb = mb_strlen($value);
+			$len_desc = 'length: '.$strlen_mb.(($strlen_mb != $strlen)?(' != bytes('.$strlen.')'):'');
 			if ($value == '') {
 				$head = '[Empty String]: ';
 			} elseif ($value === ' ') {
 				$head = '[String One space]: ';
 			} elseif (is_numeric($value)) {
-				$head = '[String Numeric, length: '.$strlen.']: ';
+				$head = '[String Numeric, '.$len_desc.']';
 			} else {
-				$head = '[String, length: '.$strlen.']: ';
+				$head = '[String, '.$len_desc.']';
 			}
 		} elseif (is_int($value)) {
 			$head = '[Integer]: ';
