@@ -10,9 +10,9 @@ use stdClass;
 define('REQUEST_HTTPS', !empty($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] !== 'off'));
 define('REQUEST_SCHEME', REQUEST_HTTPS ? 'https' : 'http');
 define('SERVER_LOCAL', strpos($_SERVER['HTTP_HOST']??'', '.') === false); // True gdy serwis pracuje lokalnie/testowo - dla online zmienna ta wyłącza komunikaty błędów ekranowych itp.
-define('COMM_ERR_STYL_INFO', 'style="z-index:9999;border-radius:3px;padding:2px;margin:20px 0 8px 0;white-space:pre;color:#800000;background:#fefdc6;font-size:8.3pt;text-align:left;font-weight:normal;border:solid 1px #cdc38b99;box-shadow:1px 1px 3px rgba(0,0,0,0.17);"');// sposób wyrożnienia komunikatów błędów
-define('COMM_ERR_STYL_TITLE', 'style="padding:3px 5px;margin:1px 1px 4px;border-radius:3px;white-space:pre;color:#880000;background:#ffe8b1;font-size:10pt;text-align:left;font-weight:bold;border:solid 1px #ffc02999;box-shadow:1px 1px 3px rgba(0,0,0,0.17);"');
-define('COMM_ERR_STYL_TYPE', 'style="color:#009900;font-size:10pt;text-align:left;font-weight:bold;"');
+define('COMM_ERR_STYL_INFO', 'style="z-index:9999;border-radius:3px;padding:4px;margin:20px 0 8px 0;white-space:pre;color:#300;background:#ffc7;font-size:.8rem;text-align:left;font-weight:normal;border:solid 1px #cc88;box-shadow:1px 1px 3px rgba(0,0,0,0.17);"');
+define('COMM_ERR_STYL_TITLE', 'style="padding:4px 6px;margin:0 0 6px 0;border-radius:3px;white-space:pre;color:#800;background:#feb7;font-weight:bold;border:solid 0 #0001; border-bottom-width: 1px"');
+define('COMM_ERR_STYL_TYPE', 'style="color:#090"');
 
 define('COMM_SALT_STRHASH', $_SERVER['SALT_STRHASH']??'DEFINE_SALT_IN_APACHE_VARIABLES');
 define('COMM_SALT_MAGIC', $_SERVER['SALT_MAGIC']??'DEFINE_SALT_IN_APACHE_VARIABLES2');
