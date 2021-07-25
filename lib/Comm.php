@@ -186,8 +186,8 @@ class Comm
 		} else {
 			if (empty($len_part)) $len_part = round(($max_len - 1) / 2, 0);
 			$afile = pathinfo($s);
-			$res0 = substr($afile['filename'], 0, $len_part);
-			$res1 = substr($afile['filename'], -$len_part);
+			$res0 = rtrim(substr($afile['filename'], 0, $len_part));
+			$res1 = ltrim(substr($afile['filename'], -$len_part));
 			$result = $res0.$hellip.$res1;
 			if (!empty($afile['extension'])) {
 				$result .= '.'.($max_len_ext ? substr($afile['extension'], 0, $max_len_ext) : $afile['extension']);
