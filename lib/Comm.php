@@ -210,12 +210,12 @@ class Comm
 		} else {
 			if ($inside) {
 				$len_part = floor(($max_len) / 2);
-				$res0 = mb_substr($s, 0, ($max_len - $len_part));
-				$res1 = mb_substr($s, -$len_part);
+				$res0 = rtrim(mb_substr($s, 0, ($max_len - $len_part)));
+				$res1 = ltrim(mb_substr($s, -$len_part));
 				return ['name' => rtrim($res0, '.').$hellip.ltrim($res1, '.'), 'title' => $s];
 			} else {
 				// type == tail
-				$res = mb_substr($s, 0, $max_len);
+				$res = rtrim(mb_substr($s, 0, $max_len));
 				return ['name' => rtrim($res, '.').$hellip, 'title' => $s];
 			}
 		}
@@ -506,8 +506,13 @@ class Comm
 	}
 
 	/**
-	 * Skraca ciąg znaków do zadanej ilości ale w pełnych wyrazach,
-	 * ciąg wynikowy nie dłuższy nież zadana ilość znaków
+	 * Shortens a string of characters to a given number but in full words,
+	 * result string not longer than the specified number of characters
+	 *
+	 * @param $str input string
+	 * @param $length maximum string length
+	 * @param string $hellip glue string
+	 * @return string
 	 */
 	public static function substr_words($str, $length, $hellip = '&hellip;')
 	{
@@ -521,7 +526,7 @@ class Comm
 				$str_cat = implode(' ', $arr_str).$hellip;
 			} else {
 				// Jeśłi tylko jeden wyraz to z niego wycinamy
-				$str_cat = mb_substr($str, 0, $length - 1).$hellip;
+				$str_cat = rtrim(mb_substr($str, 0, $length - 1)).$hellip;
 			}
 			return $str_cat;
 		}
