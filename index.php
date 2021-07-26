@@ -24,18 +24,25 @@ echo <<<CSS
 </style>
 CSS;
 
+$menu = [
+	'Authors' => '<a rel="author" href="https://eznawca.pl" target="_blank">Andrzej Mazur</a>',
+	'Packagist.org' => '<a href="https://packagist.org/packages/eznawca/comm" target="_blank">packages/eznawca/comm</a>',
+	'Canonical Repository' => '<a href="https://github.com/eznawca/Comm" target="_blank">github.com/eznawca/Comm</a>',
+	'PHP_VERSION (ID)' => '<b>'.PHP_VERSION.'</b> ('.PHP_VERSION_ID.')</a>',
+];
+
 echo '<h1>Test of the library Eznawca/Comm</h1>';
 echo '<ul>';
-	echo '<li>Authors: <a rel="author" href="https://eznawca.pl">Andrzej Mazur</a>';
-	echo '<li>Packagist.org: <a href="https://packagist.org/packages/eznawca/comm">packages/eznawca/comm</a>';
-	echo '<li>Canonical Repository: <a href="https://github.com/eznawca/Comm">github.com/eznawca/Comm</a>';
-	echo '<li>PHP_VERSION (ID): <b>'.PHP_VERSION.'</b> ('.PHP_VERSION_ID.')</a>';
+foreach ($menu as $k => $row) echo '<li>'.$k.': '.$row;
 echo '</ul>';
 
 
 $testStr = 'This is an example of a long sentence.'."\n".'Now a fragment in `Polish`:"Dzień dobry Świecie".'."\n".'Next another sentence in `German`: "Diese Allgemeinen Geschäftsbedingungen des Verkäufers gelten für alle Verträge."';
 $email = 'eznawca@gmail.com';
 
+echo '<h2>List of methods available in the Comm utility class.</h2>';
+echo '<p>The results of all methods are displayed using the <strong>r()</strong> function (the better version <strong>var_dump()</strong>).</p>';
+echo '<p>Description of the methods and functions operation is available in the library comments.</p>';
 
 r(Comm::toggleErrorDisplay(), 'Comm::toggleErrorDisplay()');
 Comm::r(['Poland' => 'PLN', 'Germany' => 'EUR'], 'Comm::r($variable, "Description") - Prints human-readable information about a variable. Better version of var_dump()/print_r()');
