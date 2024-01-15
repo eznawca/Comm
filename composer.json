@@ -19,8 +19,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Eznawca\\Comm\\": "lib/"
+			"Eznawca\\Comm\\": "src/"
 		},
-		"files": ["lib/global_functions.php"]
+		"files": ["src/global_functions.php"]
 	}
 }

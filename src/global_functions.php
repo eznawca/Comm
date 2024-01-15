@@ -101,3 +101,11 @@ if (!function_exists('fdiv')) {
 		return @($dividend / $divisor);
 	}
 }
+
+if (!function_exists('intdiv')) {
+	function intdiv($a, $b) {
+		if ($b == 0) throw new Exception('Division by zero');
+		if ($b == -1 && $a == PHP_INT_MIN) throw new Exception('ArithmeticError');
+		return (int)(($a - $a % $b) / $b);
+	}
+}

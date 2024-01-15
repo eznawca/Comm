@@ -69,7 +69,7 @@ r(Comm::str2slug($testStr), 'Comm::str2slug($testStr)');
 r(Comm::substr_words($testStr, 32), 'Comm::substr_words($testStr, 32)');
 r(Comm::is_uppercase($testStr), 'Comm::is_uppercase($testStr)');
 r(Comm::in_arraypos('function', [$testStr, 'Test Comm']), 'Comm::in_arraypos("function", [$testStr, "Test Comm"])');
-r(Comm::passwd_random(), 'Comm::passwd_random() // $polish_human = false');
+r(Comm::password_random(), 'Comm::password_random() // $polish_human = false');
 r(Comm::validate_email_domain($email), 'Comm::validate_email_domain('.$email.')');
 r(Comm::get_gravatar($email), 'Comm::get_gravatar('.$email.')');
 r(Comm::add_ascii_words($testStr), 'Comm::add_ascii_words($testStr)');
@@ -99,3 +99,7 @@ r(str_starts_with($testStr, 'This is'), 'str_starts_with($testStr, "This is") - 
 r(str_ends_with($testStr, 'Verträge."'), 'str_ends_with($testStr, \'Verträge."\') - Checks if a string ends with a given substring. Only available in PHP8');
 r(str_contains($testStr, 'Polish'), 'str_contains($testStr, "Polish") - Determine if a string contains a given substring. Only available in PHP8');
 r(fdiv(123, 0), 'fdiv(123, 0) - Divides two numbers, according to IEEE 754. Only available in PHP8');
+
+$obj1 = (object)$menu;
+$obj2 = convertToObject($menu);
+r($obj1 == $obj2, 'Object comparison');

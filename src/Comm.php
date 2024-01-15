@@ -1,21 +1,36 @@
 <?php
 /**
  * @author Andrzej Mazur <andrzej@eznawca.pl>
+ * @version 1.0
+ *
  */
 
 namespace Eznawca\Comm;
 
 use stdClass;
 
-define('REQUEST_HTTPS', !empty($_SERVER['HTTPS']) and ($_SERVER['HTTPS'] !== 'off'));
+if (!defined('LF')) define('LF', "\n");
+if (!defined('CR')) define('CR', "\r");
+if (!defined('CRLF')) define('CRLF', "\r\n");
+
+define('REQUEST_HTTPS', !empty($_SERVER['HTTPS']) AND ($_SERVER['HTTPS'] !== 'off'));
 define('REQUEST_SCHEME', REQUEST_HTTPS ? 'https' : 'http');
-define('SERVER_LOCAL', strpos($_SERVER['HTTP_HOST']??'', '.') === false); // True gdy serwis pracuje lokalnie/testowo - dla online zmienna ta wyłącza komunikaty błędów ekranowych itp.
-define('COMM_ERR_STYL_INFO', 'style="z-index:9999;border-radius:3px;padding:4px;margin:20px 0 8px 0;white-space:pre;color:#300;background:#ffc7;font-size:.8rem;text-align:left;font-weight:normal;border:solid 1px #cc88;box-shadow:1px 1px 3px rgba(0,0,0,0.17);"');
-define('COMM_ERR_STYL_TITLE', 'style="padding:4px 6px;margin:0 0 6px 0;border-radius:3px;white-space:pre;color:#800;background:#feb7;font-weight:bold;border:solid 0 #0001; border-bottom-width: 1px"');
+// True, gdy serwis pracuje lokalnie/testowo — dla online zmienna ta wyłącza komunikaty błędów ekranowych itp.
+if (!defined('LOCAL_HOST')) {
+	define('LOCAL_HOST', (strpos(@$_SERVER['HTTP_HOST'], '.') === false) ||
+		in_array(@$_SERVER['HTTP_HOST'], ['127.0.0.1', '10.0.0.1']) ||
+		(strpos(@$_SERVER['HTTP_HOST'], '192.168.') === 0)
+	);
+}
+
+define('COMM_ERR_STYL_INFO', 'style="position: relative;z-index:999999;border-radius:3px;padding:2px;margin:20px 0 8px 0;white-space:pre;color:#800;background:#fefdc6;font-size:8.3pt;text-align:left;font-weight:normal;border:solid 1px #cdc38b99;box-shadow:1px 1px 3px rgba(0,0,0,0.17);"');// sposób wyrożnienia komunikatów błędów
+define('COMM_ERR_STYL_HEADER', 'style="font-size:13px;text-align:left;font-weight:bold;padding:3px 5px;margin:1px 1px 4px;border-radius:3px;white-space:pre;color:#700;background:#ffe8b1;border:solid 1px #fc3"');
 define('COMM_ERR_STYL_TYPE', 'style="color:#090"');
+define('COMM_ERR_STYL_TITLE', 'style="color: #b00"');
 
 define('COMM_SALT_STRHASH', $_SERVER['SALT_STRHASH']??'DEFINE_SALT_IN_APACHE_VARIABLES');
 define('COMM_SALT_MAGIC', $_SERVER['SALT_MAGIC']??'DEFINE_SALT_IN_APACHE_VARIABLES2');
+if (!defined('PHP_INT_MIN')) define('PHP_INT_MIN', -PHP_INT_MAX - 1);
 
 class Comm
 {
@@ -47,12 +62,20 @@ class Comm
 	const DOMAIN10MIN = ['@a.com', '@aa.com', '@aa.pl', '@aaa.com', '@aaa.pl', '@aaaa.com', '@aaaa.pl', '@co.pl', '@x.com', '@x.pl', '@xx.com', '@xx.pl', '@xxx.com', '@xxx.pl', '@abc.com', '@abc.pl', '@abc123.com', '@abc123.pl', '@0clickemail.com', '@10minmail.com', '@10minut.xyz', '@10minutemail.co.za', '@10minutemail.com', '@10minutemail.davidxia.com', '@10minutemail.pl', '@10minutmail.pl', '@12minutemail.com', '@20minutemail.com', '@20minutemail.it', '@2mailcloud.com', '@4strefa.pl', '@7tags.com', '@99experts.com', '@a.pl', '@anonbox.net', '@anonmails.de', '@anontext.com', '@anonymbox.com', '@anonymous-email.net', '@anonymousemail.in', '@armyspy.com', '@arss.me', '@asdf.pl', '@auoie.com', '@badcomp.ovh', '@bambase.com', '@bareed.ws', '@besttempmail.com', '@binkmail.com', '@biyac.com', '@blockfilter.com', '@bobmail.info', '@bugmenot.com', '@buppel.com', '@burnermail.io', '@bylup.com', '@cellurl.com', '@ch.mintemail.com', '@chammy.info', '@chapedia.net', '@chapedia.org', '@chasefreedomactivate.com', '@coieo.com', '@cool.fr.nf', '@courriel.fr.nf', '@crazymail.guru', '@cuoly.com', '@cuvox.de', '@dayrep.com', '@deadaddress.com', '@dealja.com', '@devnullmail.com', '@dingbone.com', '@disbox.net', '@disbox.org', '@disposeamail.com', '@dispostable.com', '@dodgeit.com', '@dodgemail.de', '@domain.local', '@drdrb.com', '@drdrb.net', '@dwgtcm.com', '@eanok.com', '@ehaker.pl', '@einrot.com', '@emailondeck.com', '@emailsensei.com', '@emlpro.com', '@enayu.com', '@eoopy.com', '@fake-box.com', '@fakeinbox.com', '@fleckens.hu', '@fudgerub.com', '@getairmail.com', '@getnada.com', '@golfilla.info', '@gotcertify.com', '@grr.la', '@guerrillamail.biz', '@guerrillamail.com', '@guerrillamail.de', '@guerrillamail.info', '@guerrillamail.net', '@guerrillamail.org', '@guerrillamailblock.com', '@gustr.com', '@gxmer.com', '@htl22.at', '@ilvain.com', '@imgv.de', '@in-addr.arpa', '@incognitomail.com', '@ipsite.org', '@irankingi.pl', '@jadamspam.pl', '@jetable.fr.nf', '@jetable.org', '@jnxjn.com', '@jourrapide.com', '@kindbest.com', '@kisan.org', '@klzlk.com', '@koszmail.pl', '@ktumail.com', '@kuntul.buzz', '@kurzepost.de', '@lawlita.com', '@lite14.us', '@lookugly.com', '@lroid.com', '@luxusmail.gq', '@lykamspam.pl', '@mail.tm', '@mailcatch.com', '@mailcker.com', '@maildrop.cc', '@maileater.com', '@mailexpire.com', '@mailforspam.com', '@mailin8r.com', '@mailinater.com', '@mailinator.com', '@mailinator.net', '@mailinator2.com', '@mailmetrash.com', '@mailpoof.com', '@manybrain.com', '@manyfeed.com', '@meantinc.com', '@memsg.top', '@mepost.pw', '@mhzayt.online', '@mintemail.com', '@misterpinball.de', '@moakt.cc', '@moakt.co', '@moakt.ws', '@moncourrier.fr.nf', '@monemail.fr.nf', '@monmail.fr.nf', '@montokop.pw', '@mt2009.com', '@mt2014.com', '@my10minutemail.com', '@mytemp.email', '@mytempemail.com', '@mytrashmail.com', '@nepwk.com', '@net2mail.top', '@netmovies.pl', '@netveplay.com', '@nicoric.com', '@no-mail.pl', '@noclickemail.com', '@nomail.xl.cx', '@nospam.ze.tc', '@objectmail.com', '@oduyzrp.com', '@opentrash.com', '@owlymail.com', '@pecdo.com', '@poczter.eu', '@pokemail.net', '@pookmail.com', '@powerencry.com', '@proxymail.eu', '@putthisinyourspamdatabase.com', '@rcpt.at', '@re-gister.com', '@revengemail.com', '@rhyta.com', '@ricrk.com', '@rmqkr.net', '@roithsai.com', '@rtrtr.com', '@sadd.us', '@safetymail.info', '@send-email.org', '@sendanonymousemail.net', '@sendemail.pl', '@sharklasers.com', '@silentsender.com', '@smashmail.de', '@smellfear.com', '@sogetthis.com', '@soisz.com', '@spam.la', '@spam4.me', '@spamavert.com', '@spambox.us', '@spamcero.com', '@spamex.com', '@spamfree24.org', '@spamgoes.in', '@spamgourmet.com', '@spamherelots.com', '@spamhereplease.com', '@speed.1s.fr', '@spoofmail.de', '@suioe.com', '@superplatyna.com', '@superrito.com', '@suremail.info', '@surfdoctorfuerteventura.com', '@svenz.eu', '@tagyourself.com', '@tajny.net', '@talkinator.com', '@teleworm.us', '@temp-mail.org', '@tempemail.net', '@tempinbox.com', '@tempomail.fr', '@temporary-mail.net', '@temporaryinbox.com', '@texasaol.com', '@thankyou2010.com', '@theasciichart.com', '@thisisnotmyrealemail.com', '@thtt.us', '@tmail.ws', '@tmailinator.com', '@tmails.net', '@tmpbox.net', '@tmpmail.net', '@tmpmail.org', '@tokenmail.de', '@tradermail.info', '@trash-mail.at', '@trash-mail.com', '@trash-me.com', '@trash2009.com', '@trashmail.at', '@trashmail.com', '@trashmail.me', '@trashmail.net', '@trashymail.com', '@trbvm.com', '@trillianpro.com', '@truthfinderlogin.com', '@tyldd.com', '@tymczasowy.com', '@urhen.com', '@uroid.com', '@venompen.com', '@verifiedidentity.com', '@vztc.com', '@waroengdo.store', '@webarnak.fr.eu.org', '@wegwerfmail.de', '@wegwerfmail.net', '@wegwerfmail.org', '@wellsfargocomcardholders.com', '@wimsg.com', '@wwwnew.eu', '@xasqvz.com', '@xufcopied.com', '@yopamail.pl', '@yopmail.com', '@yopmail.fr', '@yopmail.net', '@you-spam.com', '@yuoia.com', '@zcai66.com', '@zefara.com', '@zeroe.ml', '@zetmail.com', '@zik.dj', '@zippymail.info', '@zoaxe.com', '@zwoho.com',];
 
 	/**
+	 * @return bool true if is developer host (eg. devxxx.rolladenplanet.tv) false otherweise (eg. www.rolladenplanet.de)
+	 */
+	public static function isDeveloperHost()
+	{
+		return LOCAL_HOST || preg_match('/^dev([a-z]{0,3}(\.[a-z0-9.-]+)?\.[a-z]{2,20})?$/', $_SERVER['HTTP_HOST']);
+	}
+
+	/**
 	 * Enables local mode where all errors are displayed and extended script runtime
 	 * @param bool $force Force error display regardless of local or production/online-mode
 	 */
-	public static function toggleErrorDisplay(bool $force = false)
+	public static function toggleErrorDisplay($force = false)
 	{
-		if (SERVER_LOCAL or $force) {
+		if (self::isDeveloperHost() OR $force) {
 			// Developers
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 'On');
@@ -74,9 +97,21 @@ class Comm
 	 * @param bool $return If you would like to capture the output of r(), use the return parameter. When this parameter is set to true, r() will return the information rather than print it.
 	 * @param bool $force_production Forces data display also in production mode/online-mode
 	 */
-	public static function r($value, string $title = '', bool $return = false, bool $force_production = false)
+	public static function r($value, $title = '', $return = false, $force_production = false)
 	{
-		if (!(SERVER_LOCAL OR $force_production)) return null;    // In public mode it displays nothing
+		if (!(self::isDeveloperHost() OR $force_production)) return null;    // In public mode it displays nothing
+		$backtrace_inx = (debug_backtrace()[1]['file'] == __FILE__)?2:1;
+		$file = debug_backtrace()[$backtrace_inx]['file'];
+		$file = (empty($title)?$file:basename($file)) . ':' . debug_backtrace()[$backtrace_inx]['line'];
+		$title = (!empty($title)?(' :: "' . $title . '"'):'');
+
+		// Print do konsoli
+		if (is_array($value) || is_object($value)) {
+			$con = json_encode($value);	// JSON_HEX_QUOT | JSON_HEX_TAG
+		} else {
+			$con = $value;
+		}
+		//echo '<script>console . info("PHP: `' . $title . '`");console . log("' . $con . '");</script>';
 
 		if (is_null($value)) {
 			$head = '[NULL value]';
@@ -125,19 +160,19 @@ class Comm
 			$value = print_r($value, 1);
 		}
 		// Print to console
-		echo '<script>console.info("PHP: `'.$title.'`");console.log("'.(trim($json_val??$value, '"')).'");</script>';
+		echo '<script>console.info("PHP: `'.$title.'`");console.log("'.(trim(empty($json_val) ? $value : $json_val, '"')).'");</script>';
 
 		$value = strtr($value, ['>' => '&gt;', '<' => '&lt;']);
 
 		if ($return) {
 			if (strpos($value, 'Array') !== false) {
-				return str_replace('Array', 'Array['.$title.'::'.$head.']', $value);
+				return str_replace('Array', 'Array[' . $file . ' :: ' . $head . $title . ']', $value);
 			} else {
-				return '['.$title.'::'.$head.']: '.$value."\n";
+				return '[' . $file . ' :: ' . $head . $title . ']: ' . $value . "\n";
 			}
 		} else {
 			echo '<pre '.COMM_ERR_STYL_INFO.'>';
-			echo '<pre '.COMM_ERR_STYL_TITLE.'>'.$title.'::<span '.COMM_ERR_STYL_TYPE.'><b>'.$head.'</b> </span> </pre>';
+			echo '<pre ' . COMM_ERR_STYL_HEADER . '>' . strtr($file, ['\\' => '/']) .  ' :: <span ' . COMM_ERR_STYL_TYPE . '><b>' . $head . '</b> </span><span ' . COMM_ERR_STYL_TITLE . '>' . $title . '</span></pre>';
 			echo $value;
 			echo '</pre>';
 		}
@@ -150,10 +185,10 @@ class Comm
 	 * @param bool $return If you would like to capture the output of r(), use the return parameter. When this parameter is set to true, r() will return the information rather than print it.
 	 * @param bool $force_production Forces data display also in production mode/online-mode
 	 */
-	public static function rb($value, string $title = '', bool $return = false, bool $force_production = false)
+	public static function rb($value, $title = '', $return = false, $force_production = false)
 	{
 		self::r($value, $title, $return, $force_production);
-		if (SERVER_LOCAL OR $force_production) exit;
+		if (self::isDeveloperHost() OR $force_production) exit;
 	}
 
 	/**
@@ -181,7 +216,7 @@ class Comm
 	 * @param string $hellip sticky string
 	 * @return string
 	 */
-	public static function str_short_file($s, $max_len = 16, $max_len_ext = false, $len_part = false, $hellip = '&hellip;')
+	public static function str_short_file($s, $max_len = 16, $max_len_ext = false, $len_part = false, $hellip = '…')
 	{
 		if (strlen($s) < $max_len) {
 			$result = $s;
@@ -205,7 +240,7 @@ class Comm
 	 * @param bool inside - if true cuts the section out of the center
 	 * @return array
 	 */
-	public static function str_short_name($s, $max_len, $inside = true, $hellip = '&hellip;')
+	public static function str_short_name($s, $max_len, $inside = true, $hellip = '…')
 	{
 		if (mb_strlen($s) < $max_len) {
 			return ['name' => $s, 'title' => ''];
@@ -228,20 +263,15 @@ class Comm
 	 * @param $path - file path
 	 * @return bool - false if at least 0660 could not be set
 	 */
-	public static function chmod_max($path): bool
+	public static function chmod_max($path)
 	{
-		if (!@chmod($path, 0777)) {
-			if (!@chmod($path, 0775)) {
-				if (!@chmod($path, 0774)) {
-					if (!@chmod($path, 0664)) {
-						if (!@chmod($path, 0660)) {
-							return false;
-						}
-					}
-				}
+		$permissions = [0777, 0775, 0774, 0664, 0660];
+		foreach ($permissions as $permission) {
+			if (@chmod($path, $permission)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -289,9 +319,10 @@ class Comm
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
-	public static function encode($str)
+	public static function encode($str, $compress = true)
 	{
-		return self::str_rot18(self::base64_encode_url(self::str_rot47(gzdeflate($str))));
+		if ($compress) $str = gzdeflate($str);
+		return self::str_rot18(self::base64_encode_url(self::str_rot47($str)));
 	}
 
 	/**
@@ -299,10 +330,12 @@ class Comm
 	 * @param $str - input string
 	 * @return string modified output string
 	 */
-	public static function decode($str)
+	public static function decode($str, $compress = true)
 	{
 		if (!($data = self::base64_decode_url(self::str_rot18($str)))) return false;
-		return @gzinflate(self::str_rot47($data)) ?? false;
+		$data = self::str_rot47($data);
+		if ($compress) $data = @gzinflate($data);
+		return $data;
 	}
 
 	/**
@@ -311,11 +344,13 @@ class Comm
 	 * @param $t0 int - czas do ukazania
 	 * @return string modified output string
 	 */
-	public static function date_like_facebook($t0, $get_hour = true, $short_month = false, $short_year = false, $ifempty = 'nieokreślona'): string
+	public static function date_like_facebook($t0, $get_hour = true, $short_month = false, $short_year = false, $ifempty = 'nieokreślona')
 	{
 		if (empty($t0)) return $ifempty;
 
 		$t1 = $_SERVER['REQUEST_TIME'];
+		$result_date = '';
+		$result_hour = '';
 
 		$d0_hour = (int)date('G', $t0);    // godzina 0...23
 
@@ -348,11 +383,11 @@ class Comm
 		$minut_reszta = round(abs($delta_sec - ($delta_hour * self::HOUR)) / 60);
 
 		//--- calculation of days --------------
-		if (($delta_inxday == 0) or (($delta_inxday == 1) and ($d0_hour < 5) and ($delta_hour < 5))) {
+		if (($delta_inxday == 0) OR (($delta_inxday == 1) AND ($d0_hour < 5) AND ($delta_hour < 5))) {
 			$result_date = 'Dzisiaj';    // Dla godzin nocnych < 5 podajemy `Dzisiaj`
-		} elseif (($delta_inxday == 1) or (($delta_inxday == 2) and ($d0_hour < 5) and ($delta_hour < 5))) {
+		} elseif (($delta_inxday == 1) OR (($delta_inxday == 2) AND ($d0_hour < 5) AND ($delta_hour < 5))) {
 			$result_date = 'Wczoraj';    // Dla godzin nocnych < 5 przedwczoraj podajemy także `Wczoraj`
-		} elseif (($delta_inxweek == 0) or (($delta_inxweek == 1) and ($d0_day == 'Sun'))) {
+		} elseif (($delta_inxweek == 0) OR (($delta_inxweek == 1) AND ($d0_day == 'Sun'))) {
 			$result_date = self::DAYPOL[$d0_day];    // ten sam tydzień - to nazywamy do dniem | wyjątek niedziela - tydz. poprzedni, zamiast `przedwczoraj`
 		} else {
 			if ($d0_year == $d1_year) {
@@ -400,7 +435,7 @@ class Comm
 			if (array_key_exists($key, $_SERVER) === true) {
 				foreach (explode(',', $_SERVER[$key]) as $ip) {
 					$ip = trim($ip);
-					// sprawdzamy czy zawartość $ip jest adresem IP, nie jest prywatnym adresem IP (IPv4: 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16; IPv6: zaczynające się od FD lub FC) nie jest innym zarezerwowanym zakresem IP (IPv4: 0.0.0.0/8, 169.254.0.0/16, 192.0.2.0/24 i 224.0.0.0/4)
+					// sprawdzamy, czy zawartość $ip jest adresem IP, nie jest prywatnym adresem IP (IPv4: 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16; IPv6: zaczynające się od FD lub FC) nie jest innym zarezerwowanym zakresem IP (IPv4: 0.0.0.0/8, 169.254.0.0/16, 192.0.2.0/24 i 224.0.0.0/4)
 					if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
 						return $ip;
 					}
@@ -414,10 +449,10 @@ class Comm
 	 * Podmienia parametry w query_string
 	 * Uzycie: $_SERVER['PHP_SELF'].'?'.query_build_http(array('fn' => PARAM1, 'nr' => PARAM2))
 	 * @param array $query_data - tablica podmienianych kluczy z wartościami, jeśli wartość jest NULL cały chunk/parametr jest usówany
-	 * @param string $disabled_key - klucz dla którego dany chunk/parametr nie ma być włączany do zwracanego linku
+	 * @param string $disabled_key - klucz, dla którego dany chunk/parametr nie ma być włączany do zwracanego linku
 	 * @return string zwraca nowy query_string z podmienianymi lub usuniętymi parametrami
 	 */
-	public static function query_build_http($query_data, $disabled_key = false): string
+	public static function query_build_http($query_data, $disabled_key = false)
 	{
 		$arr_query = [];
 		if (!empty($_SERVER['QUERY_STRING'])) {
@@ -451,8 +486,8 @@ class Comm
 	/**
 	 * Generuje unikalny nr IDtime na podstawie czasu i zmiennych losowych
 	 * dodatkowo kodowane do base36 + rot18.
-	 * Przystosowany do generowania unikalnych tiketów rekordów/zgłoszeń itp.
-	 * Różni się od decode() słabszym stopniem kodowania ale za to krótszym ciągiem
+	 * Przystosowany do generowania unikalnych ticket-ów rekordów/zgłoszeń itp.
+	 * Różni się od decode() słabszym stopniem kodowania, ale za to krótszym ciągiem
 	 * wynoszącym 11 znaków
 	 * @return string Unikalny IDtime, Lenght: 11
 	 */
@@ -465,7 +500,7 @@ class Comm
 
 	/**
 	 * Dekoduje unikalny IDtime do UnixTime
-	 * @param $id - zakodowany unikalny IDtime
+	 * @param $id Zakodowany unikalny IDtime
 	 */
 	public static function dekode_time_id($id)
 	{
@@ -473,7 +508,7 @@ class Comm
 	}
 
 	/**
-	 * Zamienia polskie znakie diakrytyczne na zwykłe odpowiedniki
+	 * Zamienia polskie znaki diakrytyczne na zwykłe odpowiedniki
 	 */
 	public static function pol2ascii($s)
 	{
@@ -481,7 +516,7 @@ class Comm
 	}
 
 	/**
-	 * Zamienia niemieckie znakie diakrytyczne na zwykłe odpowiedniki
+	 * Zamienia niemieckie znaki diakrytyczne na zwykłe odpowiedniki
 	 */
 	public static function de2ascii($s)
 	{
@@ -516,7 +551,7 @@ class Comm
 	 * @param string $hellip glue string
 	 * @return string
 	 */
-	public static function substr_words($str, $length, $hellip = '&hellip;')
+	public static function substr_words($str, $length , $hellip = '…')
 	{
 		$str_cat = mb_substr($str, 0, $length);
 		if ($str != $str_cat) {
@@ -536,14 +571,24 @@ class Comm
 	}
 
 	/**
+	 * Zwraca true, gdy w ciągu zawarte są tagi HTML
+	 */
+	public static function contains_tags($string)
+	{
+		$string = trim($string);
+		return strip_tags($string) != $string;
+	}
+
+	/**
 	 * Returns true if the word is fully uppercase omits non-alphabetic characters from testing.
 	 * Old name: is_wersaliki()
 	 * @param string $s input string being tested
 	 * @return bool
 	 */
-	public static function is_uppercase($s): bool
+	public static function is_uppercase($s)
 	{
 		$s = trim($s);
+		if (empty($s)) return false;
 		if (is_numeric($s)) return false;
 		$letters = preg_replace('/[^a-zA-Z0-9 -]/', '', $s);
 		return (strtoupper($letters) == $letters);
@@ -556,7 +601,7 @@ class Comm
 	 * @param array $haystack array of strings
 	 * @return false|mixed
 	 */
-	public static function in_arraypos(string $needle, array $haystack)
+	public static function in_arraypos($needle, $haystack)
 	{
 		foreach ($haystack as $inx => $val) {
 			if (strpos($val, $needle) !== false) return $inx;
@@ -569,11 +614,11 @@ class Comm
 	 * @param $len - password length
 	 * @param $polish_human - buduje hasło z polskich słów przymiotnikaRzeczownikaSymbolNr
 	 */
-	public static function passwd_random($polish_human = false): string
+	public static function password_random($polish_human = false)
 	{
 		$symbols = ['!', '#', '$', '%', '^', '&', '_'];
 		if ($polish_human) {
-			$adjective = ['czerwony', 'zielony', 'niebieski', 'zółty', 'turkusowy', 'fioletowy', 'złoty', 'srebrny', 'szary', 'stalowy', 'błękitny', 'pomarańczowy', 'śliwkowy', 'czarny', 'ciemny', 'jasny', 'różowy', 'granatowy', 'bujny', 'szybki', 'wolny', 'ciężki', 'lekki'];
+			$adjective = ['czerwony', 'zielony', 'niebieski', 'żółty', 'turkusowy', 'fioletowy', 'złoty', 'srebrny', 'szary', 'stalowy', 'błękitny', 'pomarańczowy', 'śliwkowy', 'czarny', 'ciemny', 'jasny', 'różowy', 'granatowy', 'bujny', 'szybki', 'wolny', 'ciężki', 'lekki'];
 			$noun = ['dom', 'kot', 'pies', 'auto', 'monitor', 'komp', 'smartfon', 'myszka', 'kubek', 'szklanka', 'widelec', 'traktor', 'komar', 'smycz', 'trawa', 'chmura', 'gwiazda', 'procesor', 'kawa', 'herbata', 'mleko', 'droga', 'spodnie', 'krawat', 'koszula', 'nogi', 'symbol', 'droga', 'sernik', 'ekran'];
 			return self::pol2ascii($adjective[array_rand($adjective, 1)]).ucfirst(self::pol2ascii($noun[array_rand($noun, 1)])).$symbols[array_rand($symbols, 1)].rand(10, 999);
 		} else {
@@ -586,7 +631,7 @@ class Comm
 	 * Bada konkretne domeny czy nie nalezą do tymczasowych adresów 10-min-email
 	 * STARA NAZWA: ammail_verify_magic
 	 */
-	public static function validate_email_domain($email): bool
+	public static function validate_email_domain($email)
 	{
 		$bad_user = ['spam', 'abuse', 'postmaster', 'webmaster', 'webadmin'];
 
@@ -611,22 +656,26 @@ class Comm
 	 * @param string $email The email address
 	 * @param array $attr :
 	 * 'size' - rozmiar zdjęcia: 1 - 2048px, defaults to 80px
-	 * 'rating' -  maksymalna ocena konta jeżeli chodzi o niegrzeczną/wulgarną treść: g | pg | r | x
-	 * 'forcedefault' - podane y - wymusza default picture nawet gdy hash emaila istnieje
+	 * 'rating' - maksymalna ocena konta, jeżeli chodzi o niegrzeczną/wulgarną treść: g | pg | r | x
+	 * 'forcedefault' - podane y — wymusza default picture, nawet gdy hash emaila istnieje
 	 * 'default' - domyślny zestaw obrazów: 404 | mp | identicon | monsterid | wavatar | retro | robohash | blank
-	 *        mp - mystery-person/tajemnicza osoba - prosty, sylwetkowy kontur osoby - nie zależy od hasha emaila
-	 *        identicon - geometryczny wzór oparty na haszu e-mail
-	 *        monsterid - wygenerowany POTWÓR o różnych kolorach, twarzach itp
-	 *        wavatar - wygenerowane twarze o różnych cechach i tle
-	 *        retro - niesamowite generowane, 8-bitowe pikselowe twarze w stylu arkadowym
-	 *        robohash - wygenerowany robot o różnych kolorach, twarzach itp
-	 *        blank - przezroczysty obraz PNG
+	 *		mp - mystery-person/tajemnicza osoba — prosty, sylwetkowy kontur osoby — nie zależy od hasha emaila
+	 *		identicon — geometryczny wzór oparty na haszu e-mail
+	 *		monsterid — wygenerowany POTWÓR o różnych kolorach, twarzach itp
+	 *		wavatar — wygenerowane twarze o różnych cechach i tle
+	 *		retro — niesamowite generowane, 8-bitowe pikselowe twarze w stylu arkadowym
+	 *		robohash — wygenerowany robot o różnych kolorach, twarzach itp
+	 *		blank — przezroczysty obraz PNG
 	 */
 	public static function get_gravatar($email, $attr = [])
 	{
 		$url = REQUEST_HTTPS ? 'https://secure.gravatar.com/avatar/' : 'http://www.gravatar.com/avatar/';
 		$url .= md5(strtolower(trim($email)));
-		$param = ['size' => 80, 'default' => 'robohash', 'rating' => 'g',];
+		$param = [
+			'size' => 80,
+			'default' => 'robohash',
+			'rating' => 'g',
+		];
 		foreach ($attr as $k => $v) $param[$k] = $v;
 		$url .= '?s='.$param['size'].'&d='.$param['default'].'&r='.$param['rating'];
 		return $url;
@@ -668,18 +717,20 @@ class Comm
 			$ascii = self::accent2ascii($word);
 			if ($ascii != $word) @$arr2[$ascii]++;// dodajemy wyrazy bez znaków diakrytycznych, odpowiednik: add_ascii_words()
 		}
-		arsort($arr2);
+		uksort($arr2, function($a, $b) {
+			return strcmp(Comm::accent2ascii($a), Comm::accent2ascii($b));
+		});
 		return implode(' ', array_keys($arr2));
 	}
 
 	/**
 	 * Przygotowuje wejściowy string szukający do szukania w polu `sbox`
-	 * sort - sortuje wg. długości najkrótsze słowa na początku
+	 * sort — sortuje wg. długości najkrótsze słowa na początku
 	 */
 	public static function prepare_query_string($s, $return_assoc = false, $sanitize = false, $sort = true)
 	{
 		$s = str_replace(['"', '\'', '~', '`', '<', '>', '|'], ' ', strip_tags($s));    // Usówamy niebezpieczne znaki
-		if ($sanitize) $s = filter_var($s, FILTER_SANITIZE_STRING);
+		if ($sanitize) $s = filter_var($s, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$s = mb_strtolower($s);
 		$arr1 = explode(' ', $s);
 		// Usówamy znaki gdy obejmują wyrazy
@@ -712,15 +763,8 @@ class Comm
 	 */
 	public static function nl2paragraphs($str, $class = false)
 	{
-		/*
-		$arr = explode("\n", $str);
-		$result = '';
-		foreach ($arr as $vline) if (!empty($vline)) $result .= '<p'.($class?(' class="'.$class.'"'):'').'>'.$vline.'</p>';
-		return $result;
-		*/
 		$class = ($class ? (' class="'.$class.'"') : '');
 		$str = '<p'.$class.'>'.str_replace("\n", "</p>\n".'<p'.$class.'>', str_replace(["\n \n", "\n\n", "\r"], ["\n", "\n", ''], $str)).'</p>';
-		//return $str;
 		return str_replace(['<ul>', '</ul>', '<ol>', '</ol>'], ['</p><ul>', '</ul><p'.$class.'>', '</p><ol>', '</ol><p'.$class.'>'], $str);
 	}
 
@@ -740,11 +784,10 @@ class Comm
 	{
 		$fsize = @filesize($filename);
 		$fpr = @fopen($filename, $tryb);
-//var_dump($fsize);
 		if (!$fsize) return $fpr;
 		$rows = 0;
 		$sum_len = 0;
-		while (!feof($fpr) and ($rows < $rows_analysis)) {
+		while (!feof ($fpr) AND ($rows < $rows_analysis)) {
 			$sum_len += strlen(fgets($fpr));
 			$rows++;
 		}
@@ -757,22 +800,12 @@ class Comm
 	}
 
 	/**
-	 * Zamienia wyrazy obięte `backtick` ma wyraz obięty tagiem <tag>wyraz</tag>
+	 * Zamienia wyrazy objęte `backtick` ma wyraz objęty tagiem <tag>wyraz</tag>
 	 * @param $text - ciąg wejściowy
 	 * @param $tag - wstawiany tag html
 	 */
 	public static function backtick2tag($text, $tag)
 	{
-		/*
-		$words = explode(' ', $text);
-		$replacement = [];
-		foreach ($words as $v) {
-			$v2 = trim($v, '!@#$%^&*()-_{}[];\':",./<>?\|');
-			$vt = trim($v2, '`');
-			if (str_starts_with($v2, '`') AND str_ends_with($v2, '`')) $replacement['`'.$vt.'`'] = '<'.$tag.'>'.$vt.'</'.$tag.'>';
-		}
-		return str_replace(array_keys($replacement), $replacement, $text);
-		*/
 		$count = 0;
 		$result = [];
 		for ($i = 0; $i < mb_strlen($text); $i++) {
@@ -793,7 +826,7 @@ class Comm
 
 	/**
 	 * Podświetla wyszukiwane ciągi - case-insensitive - ponieważ zwykle ciąg wyszukiwany jest małymi a podświetlamy w dowolnej wielkości
-	 * Wersja szybka nieuzywa wyrażeń regularnych - ale zawodzi gdzy szukamu ze znakami akcentowanymi a one w tekście nie występują
+	 * Wersja szybka, nie używa wyrażeń regularnych — ale zawodzi, gdy szukamy ze znakami akcentowanymi a one w tekście nie występują
 	 * @param $search - ciąg wyszukiwania
 	 * @param $text - ciąg wyświetlany
 	 */
@@ -809,15 +842,14 @@ class Comm
 	/**
 	 * Podświetla wyszukiwane ciągi - case-insensitive accent-insensitive - nie zważa na wielkość znaków jak i na znaki akcentowane
 	 * Wersja dokładna nie zmienia wielkości znaków w tekście wynikowym, za to ciąg wyszukiwania możemy podawać wielkimi i małymi znakami
-	 * używają znaków diakrytycznych i innych akcentowanych nawet jeśli one w tekście nie występują ale sa podobne do znaków latin
+	 * używając znaków diakrytycznych i innych akcentowanych nawet jeśli one w tekście nie występują, ale są podobne do znaków latin
 	 * @param $search - ciąg wyszukiwania
 	 * @param $text - ciąg wyświetlany
 	 */
 	public static function highlight($search, $text)
 	{
-		if (strlen($text) < 2 || strlen($search) < 2) {
-			return $text;
-		}
+		if (strlen($text) < 2 || strlen($search) < 2) return $text;
+
 		$popular_accent = ['a', 'c', 'e', 'l', 'n', 'o', 's', 'u', 'z', 'A', 'C', 'E', 'L', 'N', 'O', 'S', 'U', 'Z'];
 
 		foreach (self::ACCENT2ASCII as $accent => $latin) if (in_array($latin, $popular_accent)) $arrLatin[$latin][] = $accent;
@@ -837,10 +869,10 @@ class Comm
 	}
 
 	/**
-	 * Generuje kolor RGB rrbbbb zależny od podanego stringu
+	 * Generuje kolor RGB 'rrbbbb' zależny od podanego stringu
 	 * @param string $str - Ciąg wejściowy
 	 * @param int $maxRGB - Czym niższa wartość tym większa pastela, np. 240-kontrastowy(nick), 155-tekst wyróżniony, 50-odcienie tła
-	 * @param bool $numeric - Gdy true - to przyjmuje że ciąg wejciowy jest liczbą i zmienia zakres; Dla false - rozróznia znaki od 'a' do 'z' caseinsensitive
+	 * @param bool $numeric - Gdy true — to przyjmuje, że ciąg wejciowy jest liczbą i zmienia zakres; Dla false — rozróżnia znaki od 'a' do 'z' caseinsensitive
 	 */
 	public static function str2rgb($str, $maxRGB = 50, $numeric = false, $defkolor = 'b0b0b0')
 	{
@@ -903,15 +935,14 @@ class Comm
 		$hash = substr($magic, 0, 7);    // pierwsze 7 znaków to hash z time.self::SALT_MAGIC
 		$time36 = substr($magic, 7);    // reszta time zakodowany o podstawie 36
 
-		$time_from36 = base_convert($time36, 36, 10);    // time rozkodowany czyli 10 znaków
-		if (strlen((string)$time_from36) != 10) return false;
+		$time_from36 = base_convert($time36, 36, 10);	// time rozkodowany z podstawy 36 do 10
 
 		$hash_new = substr(sha1($time_from36.self::SALT_MAGIC), 0, 7);
 		if ($hash != $hash_new) return false;
 
 		$time_new = time();
 		$deltatime = ($time_new - $time_from36);
-		if (($deltatime >= $time_min) and ($deltatime <= $time_max)) {
+		if (($deltatime >= $time_min) AND ($deltatime <= $time_max)) {
 			return $deltatime;
 		} else {
 			return false;
@@ -921,7 +952,7 @@ class Comm
 	/**
 	 * Validates the referrer variable. Compares the host address with a reference variable. If the domain/host in both addresses are identical returns true
 	 */
-	public static function referer_test()
+	public static function referrer_test()
 	{
 		if (empty($_SERVER['HTTP_REFERER'])) return false;
 		$parse_host = parse_url('//'.$_SERVER['HTTP_HOST']);
@@ -931,7 +962,7 @@ class Comm
 
 	/**
 	 * Generuje zakodowany ciąg z zawartością $body i hash do weryfikacji poprawności
-	 * Używany np. do autologowania
+	 * używany np. do autologowania
 	 */
 	public static function strhash_gen($body, $salt = self::SALT_STRHASH)
 	{
@@ -958,6 +989,30 @@ class Comm
 		return ['success' => $success, 'body' => $arr['b']];
 	}
 
+	/**
+	 * Silniejsze oparte o sha512 wersje pw_encode() i pw_check() inspirowane komentarzami z: https://www.php.net/manual/en/function.sha1.php
+	 *
+	 * Randomizowane funkcje przechowywania haseł sha512, wyprowadzają one ciąg 74 znaków.
+	 * Pierwsze 64 znaki to właściwy hash sha512, połączony z losową 10 znakową solą, dołączoną na końcu.
+	 * Aby zakodować hasło, uruchom pw_encode() z hasłem, to zwróci losowy ciąg do zapisania np. w storage(bazie danych).
+	 * Hasło sprawdzaj za pomocą pw_check() z podanym hasłem i przechowywanym ciągiem $stored_hash
+	 * Funkcje te eliminują problem łamania słownikowego i przechowywania soli.
+	 */
+	public static function pw_encode($password)
+	{
+		$salt = '';
+		for ($i = 1; $i <= 10; $i++) $salt .= substr('0123456789abcdef', rand(0,15), 1);	// 10 znaków soli
+		$sha512 = substr(hash('sha512', $salt.$password), 0, 64);	// sha512: 128 znaków / obcięte do 64
+		return $sha512.$salt;
+	}
+	public static function pw_check($password, $stored_hash)
+	{
+		if (strlen($stored_hash) != 74) return false;
+		$stored_salt = substr($stored_hash, 64, 10);
+		$sha512 = substr(hash('sha512', $stored_salt.$password), 0, 64);	// sha512: 128 znaków / obcięte do 64
+		return ($sha512.$stored_salt == $stored_hash);
+	}
+
 	public static function highlightText($text, $ext = "")
 	{
 		$ext = strtolower($ext);
@@ -980,6 +1035,124 @@ class Comm
 		$text = preg_replace("|^(\\<span style\\=\"color\\: #[a-fA-F0-9]{0,6}\"\\>)(&lt;\\?php&nbsp;)(.*?)(\\</span\\>)|", "\$1\$3\$4", $text);  // remove custom added "<?php "
 
 		return $text;
+	}
+
+	/**
+	 * Zwraca zaszyfrowany ciąg chop podstawiany pod zmienną MYSQL_CHOP i SMTP_CHOP
+	 *
+	 * @param $chop_str - parametry tworzące połączony string w formacie JSON lub URL
+	 * @return string - zwraca zaszyfrowany ciąg chop
+	 */
+	public static function chopString_encode($chop_str)
+	{
+		return str_rot13(rtrim(base64_encode(str_rot13($chop_str)), '='));
+	}
+
+	/*
+	 * Rozkodowanie trywialne zmiennej tekstowej używanej do przetwarzania sekretów w zmiennych środowiskowych
+	 * zwykle z prefixem CHOP_
+	 */
+	public static function chopString_decode($s)
+	{
+		return str_rot13(base64_decode(str_rot13($s)));
+	}
+
+	/**
+	 * sposób zarządzania sekretami
+	 * Dokumentacja: gitlab -> wikis ->/Shopware/MySql Chop - sposób na ukrywanie sekretów
+	 * Dane do logowania w zmiennej środowiskowej Apache:
+	 * SetEnv MYSQL_CHOP zakodowany_chop
+	 *
+	 * @param $e Zakodowany string wejściowy przwechowywany w zmiennej środowiskowej zwykle MYSQL_CHOP
+	 * @return array Tablica z danymi konfiguracyjnymi dla MYSQL
+	 */
+	public static function chop2config($e)
+	{
+		$a = parse_url(self::chopString_decode($e));
+		return [
+			'dbname' => @$a['query'],
+			'host' => @$a['host'],
+			'port' => @$a['port'],
+			'username' => @$a['user'],
+			'password' => rawurldecode(@$a['pass']),
+		];
+	}
+
+	/**
+	 * Nowy, uproszczony w stosunku do chop2config(), sposób zarządzania sekretami
+	 * Sekretne dane np. do logowania zakodowane w zmiennej środowiskowej Apache np. :
+	 * SetEnv CHOP_SMTP zakodowany_chop
+	 *
+	 * @param $e Zakodowany string wejściowy przwechowywany w zmiennej środowiskowej zwykle MYSQL_CHOP
+	 * @return array Tablica z danymi konfiguracyjnymi dla MYSQL
+	 */
+	public static function json2chop($json)
+	{
+		$sjson = json_encode($json, JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
+		if (!$sjson) return false;
+
+		return self::chopString_encode($sjson);
+	}
+
+	/**
+	 * Analogiczny do chop2config() sposób odkodowywania sekretów
+	 * Bardziej uniwersalny, bo dekoduje zakodowanego JSONa
+	 *
+	 * @param $e Zakodowany string wejściowy przechowywany w zmiennej środowiskowej
+	 * @return array Tablica z danymi konfiguracyjnymi
+	 */
+	public static function chop2json($e)
+	{
+		return json_decode(self::chopString_decode($e), true);
+	}
+
+	/**
+	 * Zgodna z multibyte string wersja funkcji ucfirst
+	 */
+	public static function mb_ucfirst($string)
+	{
+		return mb_strtoupper(mb_substr($string, 0, 1)).mb_substr($string, 1);
+	}
+
+	/**
+	 * Zwraca listę plików o zadanym rozszerzeniu z podanego katalogu (nie działa rekurencyjnie)
+	 *
+	 */
+	public static function dirfiles($directory, $extensions = false)
+	{
+		$filenames = scandir($directory);
+		if ($filenames === false) return false;
+
+		$files = array();
+		foreach ($filenames as $file) {
+			$filePath = $directory . '/' . $file;
+			$apath = pathinfo($filePath);
+
+			if (is_file($filePath) && ($extensions === false || in_array(strtolower(@$apath['extension']), $extensions))) {
+				$files[] = $file;
+			}
+		}
+
+		return $files;
+	}
+
+	public static function generateHtmlHeader($title, $link_styles = [], $style = '', $bootstrap5 = false, $lang = 'en')
+	{
+		$html_link_styles = '';
+		if ($link_styles) {
+			foreach ($link_styles as $style_path) {
+				$html_link_styles .= '<link rel="stylesheet" href="' . $style_path . '">' . PHP_EOL;
+			}
+		}
+
+		return '<!doctype html>' . PHP_EOL . '<html lang="' . $lang . '">' . PHP_EOL . '<head>' . PHP_EOL .
+			'<meta charset="UTF-8">' . PHP_EOL . '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">' . PHP_EOL .
+			'<meta http-equiv="X-UA-Compatible" content="ie=edge">' . PHP_EOL .
+			'<title>' . htmlspecialchars($title) . '</title>' . PHP_EOL .
+			($bootstrap5 ? '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">' : '') . PHP_EOL .
+			(!empty($link_styles)?$html_link_styles:'') . PHP_EOL .
+			(!empty($style)?('<style>' . $style . '</style>'):'') . PHP_EOL .
+			'</head>' . PHP_EOL . '<body>';
 	}
 }
 
