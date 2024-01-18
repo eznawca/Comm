@@ -12,7 +12,7 @@
 	"type": "library",
 	"homepage": "https://eznawca.pl",
 	"require": {
-		"php": "~5.6",
+		"php": "^5.6 || ^7.4",
 		"ext-mbstring": "*",
 		"ext-zlib": "*",
 		"ext-json": "*"
