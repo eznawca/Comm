@@ -15,8 +15,8 @@
 Universal multi-functional multi-tool library
 
 ### Technologies
-Project is created with:
-* [PHP](https://www.php.net/) ^7.
+Project is created for:
+* [PHP](https://www.php.net/) 5.6 or better.
 
 ### Setup
 To run this project, install it locally using Composer:
