@@ -5,9 +5,7 @@
  *
  */
 
-namespace Eznawca\Comm;
-
-use stdClass;
+if (!defined('PHP_INT_MIN')) define('PHP_INT_MIN', -PHP_INT_MAX - 1);
 
 if (!defined('LF')) define('LF', "\n");
 if (!defined('CR')) define('CR', "\r");
@@ -28,9 +26,18 @@ define('COMM_ERR_STYL_HEADER', 'style="font-size:13px;text-align:left;font-weigh
 define('COMM_ERR_STYL_TYPE', 'style="color:#090"');
 define('COMM_ERR_STYL_TITLE', 'style="color: #b00"');
 
-define('COMM_SALT_STRHASH', $_SERVER['SALT_STRHASH']??'DEFINE_SALT_IN_APACHE_VARIABLES');
-define('COMM_SALT_MAGIC', $_SERVER['SALT_MAGIC']??'DEFINE_SALT_IN_APACHE_VARIABLES2');
-if (!defined('PHP_INT_MIN')) define('PHP_INT_MIN', -PHP_INT_MAX - 1);
+$comm_daypol = ['Mon' => 'Poniedziałek', 'Tue' => 'Wtorek', 'Wed' => 'Środa', 'Thu' => 'Czwartek', 'Fri' => 'Piątek', 'Sat' => 'Sobota', 'Sun' => 'Niedziela'];
+$comm_monthpol = ['Jan' => 'Styczeń', 'Feb' => 'Luty', 'Mar' => 'Marzec', 'Apr' => 'Kwiecień', 'May' => 'Maj', 'Jun' => 'Czerwiec', 'Jul' => 'Lipiec', 'Aug' => 'Sierpień', 'Sep' => 'Wrzesień', 'Oct' => 'Październik', 'Nov' => 'Listopad', 'Dec' => 'Grudzień'];
+$comm_pol2ascii = ['ą' => 'a', 'Ą' => 'A', 'ć' => 'c', 'Ć' => 'C', 'ę' => 'e', 'Ę' => 'E', 'ł' => 'l', 'Ł' => 'L', 'ń' => 'n', 'Ń' => 'N', 'ó' => 'o', 'Ó' => 'O', 'ś' => 's', 'Ś' => 'S', 'ż' => 'z', 'ź' => 'z', 'Ź' => 'Z'];
+$comm_de2ascii = ['ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue', 'ß' => 'ss'];
+$comm_accent2ascii = ['À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'ß' => 's', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ý' => 'y', 'ÿ' => 'y', 'Ā' => 'A', 'ā' => 'a', 'Ă' => 'A', 'ă' => 'a', 'Ą' => 'A', 'ą' => 'a', 'Ć' => 'C', 'ć' => 'c', 'Ĉ' => 'C', 'ĉ' => 'c', 'Ċ' => 'C', 'ċ' => 'c', 'Č' => 'C', 'č' => 'c', 'Ď' => 'D', 'ď' => 'd', 'Đ' => 'D', 'đ' => 'd', 'Ē' => 'E', 'ē' => 'e', 'Ĕ' => 'E', 'ĕ' => 'e', 'Ė' => 'E', 'ė' => 'e', 'Ę' => 'E', 'ę' => 'e', 'Ě' => 'E', 'ě' => 'e', 'Ĝ' => 'G', 'ĝ' => 'g', 'Ğ' => 'G', 'ğ' => 'g', 'Ġ' => 'G', 'ġ' => 'g', 'Ģ' => 'G', 'ģ' => 'g', 'Ĥ' => 'H', 'ĥ' => 'h', 'Ħ' => 'H', 'ħ' => 'h', 'Ĩ' => 'I', 'ĩ' => 'i', 'Ī' => 'I', 'ī' => 'i', 'Ĭ' => 'I', 'ĭ' => 'i', 'Į' => 'I', 'į' => 'i', 'İ' => 'I', 'ı' => 'i', 'Ĳ' => 'IJ', 'ĳ' => 'ij', 'Ĵ' => 'J', 'ĵ' => 'j', 'Ķ' => 'K', 'ķ' => 'k', 'Ĺ' => 'L', 'ĺ' => 'l', 'Ļ' => 'L', 'ļ' => 'l', 'Ľ' => 'L', 'ľ' => 'l', 'Ŀ' => 'L', 'ŀ' => 'l', 'Ł' => 'l', 'ł' => 'l', 'Ń' => 'N', 'ń' => 'n', 'Ņ' => 'N', 'ņ' => 'n', 'Ň' => 'N', 'ň' => 'n', 'ŉ' => 'n', 'Ō' => 'O', 'ō' => 'o', 'Ŏ' => 'O', 'ŏ' => 'o', 'Ő' => 'O', 'ő' => 'o', 'Œ' => 'OE', 'œ' => 'oe', 'Ŕ' => 'R', 'ŕ' => 'r', 'Ŗ' => 'R', 'ŗ' => 'r', 'Ř' => 'R', 'ř' => 'r', 'Ś' => 'S', 'ś' => 's', 'Ŝ' => 'S', 'ŝ' => 's', 'Ş' => 'S', 'ş' => 's', 'Š' => 'S', 'š' => 's', 'Ţ' => 'T', 'ţ' => 't', 'Ť' => 'T', 'ť' => 't', 'Ŧ' => 'T', 'ŧ' => 't', 'Ũ' => 'U', 'ũ' => 'u', 'Ū' => 'U', 'ū' => 'u', 'Ŭ' => 'U', 'ŭ' => 'u', 'Ů' => 'U', 'ů' => 'u', 'Ű' => 'U', 'ű' => 'u', 'Ų' => 'U', 'ų' => 'u', 'Ŵ' => 'W', 'ŵ' => 'w', 'Ŷ' => 'Y', 'ŷ' => 'y', 'Ÿ' => 'Y', 'Ź' => 'Z', 'ź' => 'z', 'Ż' => 'Z', 'ż' => 'z', 'Ž' => 'Z', 'ž' => 'z', 'ſ' => 's', 'ƒ' => 'f', 'Ơ' => 'O', 'ơ' => 'o', 'Ư' => 'U', 'ư' => 'u', 'Ǎ' => 'A', 'ǎ' => 'a', 'Ǐ' => 'I', 'ǐ' => 'i', 'Ǒ' => 'O', 'ǒ' => 'o', 'Ǔ' => 'U', 'ǔ' => 'u', 'Ǖ' => 'U', 'ǖ' => 'u', 'Ǘ' => 'U', 'ǘ' => 'u', 'Ǚ' => 'U', 'ǚ' => 'u', 'Ǜ' => 'U', 'ǜ' => 'u', 'Ǻ' => 'A', 'ǻ' => 'a', 'Ǽ' => 'AE', 'ǽ' => 'ae', 'Ǿ' => 'O', 'ǿ' => 'o'];
+$comm_bad_symbols = "`~!@#$%^&*()-_=+[]{};:'\",.<>/?|\n\r\t\\";
+$comm_10mindomain = ['@0clickemail.com','@10minmail.com','@10minut.xyz','@10minutemail.co.za','@10minutemail.com','@10minutemail.davidxia.com','@10minutemail.pl','@10minutmail.pl','@12minutemail.com','@20minutemail.com','@20minutemail.it','@2mailcloud.com','@4strefa.pl','@7tags.com','@99experts.com','@a.com','@a.pl','@aa.com','@aa.pl','@aaa.com','@aaa.pl','@aaaa.com','@aaaa.pl','@abc.com','@abc.pl','@abc123.com','@abc123.pl','@anonbox.net','@anonmails.de','@anontext.com','@anonymbox.com','@anonymous-email.net','@anonymousemail.in','@armyspy.com','@arss.me','@asdf.pl','@auoie.com','@badcomp.ovh','@bambase.com','@bareed.ws','@besttempmail.com','@binkmail.com','@biyac.com','@blockfilter.com','@bobmail.info','@bugmenot.com','@buppel.com','@burnermail.io','@bylup.com','@cellurl.com','@ch.mintemail.com','@chammy.info','@chapedia.net','@chapedia.org','@chasefreedomactivate.com','@co.pl','@coieo.com','@cool.fr.nf','@courriel.fr.nf','@crazymail.guru','@cuoly.com','@cuvox.de','@dayrep.com','@deadaddress.com','@dealja.com','@devnullmail.com','@dingbone.com','@disbox.net','@disbox.org','@disposeamail.com','@dispostable.com','@dodgeit.com','@dodgemail.de','@domain.local','@drdrb.com','@drdrb.net','@dwgtcm.com','@eanok.com','@ehaker.pl','@einrot.com','@emailondeck.com','@emailsensei.com','@emlpro.com','@enayu.com','@eoopy.com','@fake-box.com','@fakeinbox.com','@fleckens.hu','@fudgerub.com','@getairmail.com','@getnada.com','@golfilla.info','@gotcertify.com','@grr.la','@guerrillamail.biz','@guerrillamail.com','@guerrillamail.de','@guerrillamail.info','@guerrillamail.net','@guerrillamail.org','@guerrillamailblock.com','@gustr.com','@gxmer.com','@htl22.at','@ilvain.com','@imgv.de','@in-addr.arpa','@incognitomail.com','@ipsite.org','@irankingi.pl','@jadamspam.pl','@jetable.fr.nf','@jetable.org','@jnxjn.com','@jourrapide.com','@kindbest.com','@kisan.org','@klzlk.com','@koszmail.pl','@ktumail.com','@kuntul.buzz','@kurzepost.de','@lawlita.com','@lite14.us','@lookugly.com','@lroid.com','@luxusmail.gq','@lykamspam.pl','@mail.tm','@mailcatch.com','@mailcker.com','@maildrop.cc','@maileater.com','@mailexpire.com','@mailforspam.com','@mailin8r.com','@mailinater.com','@mailinator.com','@mailinator.net','@mailinator2.com','@mailmetrash.com','@mailpoof.com','@manybrain.com','@manyfeed.com','@meantinc.com','@memsg.top','@mepost.pw','@mhzayt.online','@mintemail.com','@misterpinball.de','@moakt.cc','@moakt.co','@moakt.ws','@moncourrier.fr.nf','@monemail.fr.nf','@monmail.fr.nf','@montokop.pw','@mt2009.com','@mt2014.com','@my10minutemail.com','@mytemp.email','@mytempemail.com','@mytrashmail.com','@nepwk.com','@net2mail.top','@netmovies.pl','@netveplay.com','@nicoric.com','@no-mail.pl','@noclickemail.com','@nomail.xl.cx','@nospam.ze.tc','@objectmail.com','@oduyzrp.com','@opentrash.com','@owlymail.com','@pecdo.com','@poczter.eu','@pokemail.net','@pookmail.com','@powerencry.com','@proxymail.eu','@putthisinyourspamdatabase.com','@rcpt.at','@re-gister.com','@revengemail.com','@rhyta.com','@ricrk.com','@rmqkr.net','@roithsai.com','@rtrtr.com','@sadd.us','@safetymail.info','@send-email.org','@sendanonymousemail.net','@sendemail.pl','@sharklasers.com','@silentsender.com','@smashmail.de','@smellfear.com','@sogetthis.com','@soisz.com','@spam.la','@spam4.me','@spamavert.com','@spambox.us','@spamcero.com','@spamex.com','@spamfree24.org','@spamgoes.in','@spamgourmet.com','@spamherelots.com','@spamhereplease.com','@speed.1s.fr','@spoofmail.de','@suioe.com','@superplatyna.com','@superrito.com','@suremail.info','@surfdoctorfuerteventura.com','@svenz.eu','@t70r65@mepost.pw','@tagyourself.com','@tajny.net','@talkinator.com','@teleworm.us','@temp-mail.org','@tempemail.net','@tempinbox.com','@tempomail.fr','@temporary-mail.net','@temporaryinbox.com','@texasaol.com','@thankyou2010.com','@theasciichart.com','@thisisnotmyrealemail.com','@thtt.us','@tmail.ws','@tmailinator.com','@tmails.net','@tmpbox.net','@tmpmail.net','@tmpmail.org','@tokenmail.de','@tradermail.info','@trash-mail.at','@trash-mail.com','@trash-me.com','@trash2009.com','@trashmail.at','@trashmail.com','@trashmail.me','@trashmail.net','@trashymail.com','@trbvm.com','@trillianpro.com','@truthfinderlogin.com','@tyldd.com','@tymczasowy.com','@urhen.com','@uroid.com','@venompen.com','@verifiedidentity.com','@vztc.com','@waroengdo.store','@webarnak.fr.eu.org','@wegwerfmail.de','@wegwerfmail.net','@wegwerfmail.org','@wellsfargocomcardholders.com','@wimsg.com','@wwwnew.eu','@x.com','@x.pl','@xasqvz.com','@xufcopied.com','@xx.com','@xx.pl','@xxx.com','@xxx.pl','@yopamail.pl','@yopmail.com','@yopmail.fr','@yopmail.net','@you-spam.com','@yuoia.com','@zcai66.com','@zefara.com','@zeroe.ml','@zetmail.com','@zik.dj','@zippymail.info','@zoaxe.com','@zwoho.com'];
+
+$comm_stop_4words_german = ['durch', 'wird', 'seid', 'sind', 'werde', 'werden', 'wieder', 'werdet', 'ihre', 'jede', 'eure', 'eine', 'soweit', 'einem', 'jedem', 'einen', 'jeden', 'woher', 'jeder', 'einer', 'daher', 'unter', 'unser', 'jener', 'unsere', 'jedes', 'jenes', 'eines', 'nach', 'sich', 'doch', 'auch', 'weshalb', 'deshalb', 'nachdem', 'machen', 'nicht', 'sowie', 'wohin', 'soll', 'sollen', 'sollst', 'sollt', 'mein', 'sein', 'wenn', 'wann', 'nein', 'kann', 'dein', 'meine', 'seine', 'deine', 'können', 'kannst', 'könnt', 'euer', 'aber', 'hier', 'oder', 'über', 'dass', 'dies', 'dessen', 'müssen', 'dieser', 'dieses', 'wieso', 'sonst', 'musst', 'wirst', 'mußt', 'bist', 'müßt', 'dort', 'hatte', 'hatten', 'hinter', 'weiter', 'weitere', 'hattest', 'hattet', 'warum', 'darum', 'dadurch', 'jetzt'];
+
+define('COMM_SALT_STRHASH', empty($_SERVER['SALT_STRHASH'])?'k6bK9u@qZRpMgn@d':$_SERVER['SALT_STRHASH']);
+define('COMM_SALT_MAGIC', empty($_SERVER['SALT_MAGIC'])?'b6LN$Dch@EQp8Mj#':$_SERVER['SALT_MAGIC']);
 
 class Comm
 {
@@ -45,21 +52,9 @@ class Comm
 
 	const TAG_NEWLINE = '[newline]'; // Zastępczy/umowny znak nowego wiersza używany do zakodowania \n, musi być odporny na FILTER_SANITIZE_STRING
 
-	const SALT_STRHASH = COMM_SALT_STRHASH;
 	const SALT_STRHASH_LEN = 12;
-	const SALT_MAGIC = COMM_SALT_MAGIC;
-	const MAGICSTR_MAXTIME = self::HOUR;
+	const MAGICSTR_MAXTIME = 3600; 	// HOUR;
 	const MAGICSTR_MINTIME = 3;
-
-	const ACCENT2ASCII = ['À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'ß' => 's', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'ý' => 'y', 'ÿ' => 'y', 'Ā' => 'A', 'ā' => 'a', 'Ă' => 'A', 'ă' => 'a', 'Ą' => 'A', 'ą' => 'a', 'Ć' => 'C', 'ć' => 'c', 'Ĉ' => 'C', 'ĉ' => 'c', 'Ċ' => 'C', 'ċ' => 'c', 'Č' => 'C', 'č' => 'c', 'Ď' => 'D', 'ď' => 'd', 'Đ' => 'D', 'đ' => 'd', 'Ē' => 'E', 'ē' => 'e', 'Ĕ' => 'E', 'ĕ' => 'e', 'Ė' => 'E', 'ė' => 'e', 'Ę' => 'E', 'ę' => 'e', 'Ě' => 'E', 'ě' => 'e', 'Ĝ' => 'G', 'ĝ' => 'g', 'Ğ' => 'G', 'ğ' => 'g', 'Ġ' => 'G', 'ġ' => 'g', 'Ģ' => 'G', 'ģ' => 'g', 'Ĥ' => 'H', 'ĥ' => 'h', 'Ħ' => 'H', 'ħ' => 'h', 'Ĩ' => 'I', 'ĩ' => 'i', 'Ī' => 'I', 'ī' => 'i', 'Ĭ' => 'I', 'ĭ' => 'i', 'Į' => 'I', 'į' => 'i', 'İ' => 'I', 'ı' => 'i', 'Ĳ' => 'IJ', 'ĳ' => 'ij', 'Ĵ' => 'J', 'ĵ' => 'j', 'Ķ' => 'K', 'ķ' => 'k', 'Ĺ' => 'L', 'ĺ' => 'l', 'Ļ' => 'L', 'ļ' => 'l', 'Ľ' => 'L', 'ľ' => 'l', 'Ŀ' => 'L', 'ŀ' => 'l', 'Ł' => 'l', 'ł' => 'l', 'Ń' => 'N', 'ń' => 'n', 'Ņ' => 'N', 'ņ' => 'n', 'Ň' => 'N', 'ň' => 'n', 'ŉ' => 'n', 'Ō' => 'O', 'ō' => 'o', 'Ŏ' => 'O', 'ŏ' => 'o', 'Ő' => 'O', 'ő' => 'o', 'Œ' => 'OE', 'œ' => 'oe', 'Ŕ' => 'R', 'ŕ' => 'r', 'Ŗ' => 'R', 'ŗ' => 'r', 'Ř' => 'R', 'ř' => 'r', 'Ś' => 'S', 'ś' => 's', 'Ŝ' => 'S', 'ŝ' => 's', 'Ş' => 'S', 'ş' => 's', 'Š' => 'S', 'š' => 's', 'Ţ' => 'T', 'ţ' => 't', 'Ť' => 'T', 'ť' => 't', 'Ŧ' => 'T', 'ŧ' => 't', 'Ũ' => 'U', 'ũ' => 'u', 'Ū' => 'U', 'ū' => 'u', 'Ŭ' => 'U', 'ŭ' => 'u', 'Ů' => 'U', 'ů' => 'u', 'Ű' => 'U', 'ű' => 'u', 'Ų' => 'U', 'ų' => 'u', 'Ŵ' => 'W', 'ŵ' => 'w', 'Ŷ' => 'Y', 'ŷ' => 'y', 'Ÿ' => 'Y', 'Ź' => 'Z', 'ź' => 'z', 'Ż' => 'Z', 'ż' => 'z', 'Ž' => 'Z', 'ž' => 'z', 'ſ' => 's', 'ƒ' => 'f', 'Ơ' => 'O', 'ơ' => 'o', 'Ư' => 'U', 'ư' => 'u', 'Ǎ' => 'A', 'ǎ' => 'a', 'Ǐ' => 'I', 'ǐ' => 'i', 'Ǒ' => 'O', 'ǒ' => 'o', 'Ǔ' => 'U', 'ǔ' => 'u', 'Ǖ' => 'U', 'ǖ' => 'u', 'Ǘ' => 'U', 'ǘ' => 'u', 'Ǚ' => 'U', 'ǚ' => 'u', 'Ǜ' => 'U', 'ǜ' => 'u', 'Ǻ' => 'A', 'ǻ' => 'a', 'Ǽ' => 'AE', 'ǽ' => 'ae', 'Ǿ' => 'O', 'ǿ' => 'o'];
-
-	const DAYPOL = ['Mon' => 'Poniedziałek', 'Tue' => 'Wtorek', 'Wed' => 'Środa', 'Thu' => 'Czwartek', 'Fri' => 'Piątek', 'Sat' => 'Sobota', 'Sun' => 'Niedziela'];
-	const MONTHPOL = ['Jan' => 'Styczeń', 'Feb' => 'Luty', 'Mar' => 'Marzec', 'Apr' => 'Kwiecień', 'May' => 'Maj', 'Jun' => 'Czerwiec', 'Jul' => 'Lipiec', 'Aug' => 'Sierpień', 'Sep' => 'Wrzesień', 'Oct' => 'Październik', 'Nov' => 'Listopad', 'Dec' => 'Grudzień'];
-	const POL2ASCII = ['ą' => 'a', 'Ą' => 'A', 'ć' => 'c', 'Ć' => 'C', 'ę' => 'e', 'Ę' => 'E', 'ł' => 'l', 'Ł' => 'L', 'ń' => 'n', 'Ń' => 'N', 'ó' => 'o', 'Ó' => 'O', 'ś' => 's', 'Ś' => 'S', 'ż' => 'z', 'ź' => 'z', 'Ź' => 'Z'];
-	const DE2ASCII = ['ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue', 'ß' => 'ss'];
-	const STOP_4WORDS_GERMAN = ['durch', 'wird', 'seid', 'sind', 'werde', 'werden', 'wieder', 'werdet', 'ihre', 'jede', 'eure', 'eine', 'soweit', 'einem', 'jedem', 'einen', 'jeden', 'woher', 'jeder', 'einer', 'daher', 'unter', 'unser', 'jener', 'unsere', 'jedes', 'jenes', 'eines', 'nach', 'sich', 'doch', 'auch', 'weshalb', 'deshalb', 'nachdem', 'machen', 'nicht', 'sowie', 'wohin', 'soll', 'sollen', 'sollst', 'sollt', 'mein', 'sein', 'wenn', 'wann', 'nein', 'kann', 'dein', 'meine', 'seine', 'deine', 'können', 'kannst', 'könnt', 'euer', 'aber', 'hier', 'oder', 'über', 'dass', 'dies', 'dessen', 'müssen', 'dieser', 'dieses', 'wieso', 'sonst', 'musst', 'wirst', 'mußt', 'bist', 'müßt', 'dort', 'hatte', 'hatten', 'hinter', 'weiter', 'weitere', 'hattest', 'hattet', 'warum', 'darum', 'dadurch', 'jetzt'];
-	const BAD_SYMBOLS = "`~!@#$%^&*()-_=+[]{};:'\",.<>/?|\n\r\t\\";
-	const DOMAIN10MIN = ['@a.com', '@aa.com', '@aa.pl', '@aaa.com', '@aaa.pl', '@aaaa.com', '@aaaa.pl', '@co.pl', '@x.com', '@x.pl', '@xx.com', '@xx.pl', '@xxx.com', '@xxx.pl', '@abc.com', '@abc.pl', '@abc123.com', '@abc123.pl', '@0clickemail.com', '@10minmail.com', '@10minut.xyz', '@10minutemail.co.za', '@10minutemail.com', '@10minutemail.davidxia.com', '@10minutemail.pl', '@10minutmail.pl', '@12minutemail.com', '@20minutemail.com', '@20minutemail.it', '@2mailcloud.com', '@4strefa.pl', '@7tags.com', '@99experts.com', '@a.pl', '@anonbox.net', '@anonmails.de', '@anontext.com', '@anonymbox.com', '@anonymous-email.net', '@anonymousemail.in', '@armyspy.com', '@arss.me', '@asdf.pl', '@auoie.com', '@badcomp.ovh', '@bambase.com', '@bareed.ws', '@besttempmail.com', '@binkmail.com', '@biyac.com', '@blockfilter.com', '@bobmail.info', '@bugmenot.com', '@buppel.com', '@burnermail.io', '@bylup.com', '@cellurl.com', '@ch.mintemail.com', '@chammy.info', '@chapedia.net', '@chapedia.org', '@chasefreedomactivate.com', '@coieo.com', '@cool.fr.nf', '@courriel.fr.nf', '@crazymail.guru', '@cuoly.com', '@cuvox.de', '@dayrep.com', '@deadaddress.com', '@dealja.com', '@devnullmail.com', '@dingbone.com', '@disbox.net', '@disbox.org', '@disposeamail.com', '@dispostable.com', '@dodgeit.com', '@dodgemail.de', '@domain.local', '@drdrb.com', '@drdrb.net', '@dwgtcm.com', '@eanok.com', '@ehaker.pl', '@einrot.com', '@emailondeck.com', '@emailsensei.com', '@emlpro.com', '@enayu.com', '@eoopy.com', '@fake-box.com', '@fakeinbox.com', '@fleckens.hu', '@fudgerub.com', '@getairmail.com', '@getnada.com', '@golfilla.info', '@gotcertify.com', '@grr.la', '@guerrillamail.biz', '@guerrillamail.com', '@guerrillamail.de', '@guerrillamail.info', '@guerrillamail.net', '@guerrillamail.org', '@guerrillamailblock.com', '@gustr.com', '@gxmer.com', '@htl22.at', '@ilvain.com', '@imgv.de', '@in-addr.arpa', '@incognitomail.com', '@ipsite.org', '@irankingi.pl', '@jadamspam.pl', '@jetable.fr.nf', '@jetable.org', '@jnxjn.com', '@jourrapide.com', '@kindbest.com', '@kisan.org', '@klzlk.com', '@koszmail.pl', '@ktumail.com', '@kuntul.buzz', '@kurzepost.de', '@lawlita.com', '@lite14.us', '@lookugly.com', '@lroid.com', '@luxusmail.gq', '@lykamspam.pl', '@mail.tm', '@mailcatch.com', '@mailcker.com', '@maildrop.cc', '@maileater.com', '@mailexpire.com', '@mailforspam.com', '@mailin8r.com', '@mailinater.com', '@mailinator.com', '@mailinator.net', '@mailinator2.com', '@mailmetrash.com', '@mailpoof.com', '@manybrain.com', '@manyfeed.com', '@meantinc.com', '@memsg.top', '@mepost.pw', '@mhzayt.online', '@mintemail.com', '@misterpinball.de', '@moakt.cc', '@moakt.co', '@moakt.ws', '@moncourrier.fr.nf', '@monemail.fr.nf', '@monmail.fr.nf', '@montokop.pw', '@mt2009.com', '@mt2014.com', '@my10minutemail.com', '@mytemp.email', '@mytempemail.com', '@mytrashmail.com', '@nepwk.com', '@net2mail.top', '@netmovies.pl', '@netveplay.com', '@nicoric.com', '@no-mail.pl', '@noclickemail.com', '@nomail.xl.cx', '@nospam.ze.tc', '@objectmail.com', '@oduyzrp.com', '@opentrash.com', '@owlymail.com', '@pecdo.com', '@poczter.eu', '@pokemail.net', '@pookmail.com', '@powerencry.com', '@proxymail.eu', '@putthisinyourspamdatabase.com', '@rcpt.at', '@re-gister.com', '@revengemail.com', '@rhyta.com', '@ricrk.com', '@rmqkr.net', '@roithsai.com', '@rtrtr.com', '@sadd.us', '@safetymail.info', '@send-email.org', '@sendanonymousemail.net', '@sendemail.pl', '@sharklasers.com', '@silentsender.com', '@smashmail.de', '@smellfear.com', '@sogetthis.com', '@soisz.com', '@spam.la', '@spam4.me', '@spamavert.com', '@spambox.us', '@spamcero.com', '@spamex.com', '@spamfree24.org', '@spamgoes.in', '@spamgourmet.com', '@spamherelots.com', '@spamhereplease.com', '@speed.1s.fr', '@spoofmail.de', '@suioe.com', '@superplatyna.com', '@superrito.com', '@suremail.info', '@surfdoctorfuerteventura.com', '@svenz.eu', '@tagyourself.com', '@tajny.net', '@talkinator.com', '@teleworm.us', '@temp-mail.org', '@tempemail.net', '@tempinbox.com', '@tempomail.fr', '@temporary-mail.net', '@temporaryinbox.com', '@texasaol.com', '@thankyou2010.com', '@theasciichart.com', '@thisisnotmyrealemail.com', '@thtt.us', '@tmail.ws', '@tmailinator.com', '@tmails.net', '@tmpbox.net', '@tmpmail.net', '@tmpmail.org', '@tokenmail.de', '@tradermail.info', '@trash-mail.at', '@trash-mail.com', '@trash-me.com', '@trash2009.com', '@trashmail.at', '@trashmail.com', '@trashmail.me', '@trashmail.net', '@trashymail.com', '@trbvm.com', '@trillianpro.com', '@truthfinderlogin.com', '@tyldd.com', '@tymczasowy.com', '@urhen.com', '@uroid.com', '@venompen.com', '@verifiedidentity.com', '@vztc.com', '@waroengdo.store', '@webarnak.fr.eu.org', '@wegwerfmail.de', '@wegwerfmail.net', '@wegwerfmail.org', '@wellsfargocomcardholders.com', '@wimsg.com', '@wwwnew.eu', '@xasqvz.com', '@xufcopied.com', '@yopamail.pl', '@yopmail.com', '@yopmail.fr', '@yopmail.net', '@you-spam.com', '@yuoia.com', '@zcai66.com', '@zefara.com', '@zeroe.ml', '@zetmail.com', '@zik.dj', '@zippymail.info', '@zoaxe.com', '@zwoho.com',];
 
 	/**
 	 * @return bool true if is developer host (eg. devxxx.rolladenplanet.tv) false otherweise (eg. www.rolladenplanet.de)
@@ -346,6 +341,7 @@ class Comm
 	 */
 	public static function date_like_facebook($t0, $get_hour = true, $short_month = false, $short_year = false, $ifempty = 'nieokreślona')
 	{
+		global $comm_daypol, $comm_monthpol;
 		if (empty($t0)) return $ifempty;
 
 		$t1 = $_SERVER['REQUEST_TIME'];
@@ -388,7 +384,7 @@ class Comm
 		} elseif (($delta_inxday == 1) OR (($delta_inxday == 2) AND ($d0_hour < 5) AND ($delta_hour < 5))) {
 			$result_date = 'Wczoraj';    // Dla godzin nocnych < 5 przedwczoraj podajemy także `Wczoraj`
 		} elseif (($delta_inxweek == 0) OR (($delta_inxweek == 1) AND ($d0_day == 'Sun'))) {
-			$result_date = self::DAYPOL[$d0_day];    // ten sam tydzień - to nazywamy do dniem | wyjątek niedziela - tydz. poprzedni, zamiast `przedwczoraj`
+			$result_date = $comm_daypol[$d0_day];	// ten sam tydzień - to nazywamy do dniem | wyjątek niedziela - tydz. poprzedni, zamiast `przedwczoraj`
 		} else {
 			if ($d0_year == $d1_year) {
 				$view_year = '';
@@ -399,7 +395,7 @@ class Comm
 					$view_year = $d0_year;
 				}
 			}
-			$month = self::MONTHPOL[date('M', $t0)];
+			$month = $comm_monthpol[date('M', $t0)];
 			if ($short_month) $month = mb_substr($month, 0, 3);
 			$result_date = $d0_j.' '.$month.' '.$view_year;
 		}
@@ -512,7 +508,8 @@ class Comm
 	 */
 	public static function pol2ascii($s)
 	{
-		return strtr($s, self::POL2ASCII);
+		global $comm_pol2ascii;
+		return strtr($s, $comm_pol2ascii);
 	}
 
 	/**
@@ -520,7 +517,8 @@ class Comm
 	 */
 	public static function de2ascii($s)
 	{
-		return strtr($s, self::DE2ASCII);
+		global $comm_de2ascii;
+		return strtr($s, $comm_de2ascii);
 	}
 
 	/**
@@ -528,7 +526,8 @@ class Comm
 	 */
 	public static function accent2ascii($s)
 	{
-		return strtr($s, self::ACCENT2ASCII);
+		global $comm_accent2ascii;
+		return strtr($s, $comm_accent2ascii);
 	}
 
 	/**
@@ -633,6 +632,7 @@ class Comm
 	 */
 	public static function validate_email_domain($email)
 	{
+		global $comm_10mindomain;
 		$bad_user = ['spam', 'abuse', 'postmaster', 'webmaster', 'webadmin'];
 
 		if (empty($email)) return false;
@@ -645,7 +645,7 @@ class Comm
 		if (in_array($user, $bad_user)) return false;
 
 		// odrzucamy adresy e-mail należące do domen 10-min-email
-		if (str_replace(self::DOMAIN10MIN, '', $email) != $email) return false;
+		if (str_replace($comm_10mindomain, '', $email) != $email) return false;
 		return true;
 	}
 
@@ -705,9 +705,11 @@ class Comm
 	 */
 	public static function get_search_string($str)
 	{
+		global $comm_bad_symbols;
+
 		if (is_array($str)) $str = implode(' ', $str);
 		$str = strip_tags($str);
-		$str = strtr($str, self::BAD_SYMBOLS, str_pad('', strlen(self::BAD_SYMBOLS), ' '));    // zamienia self::bad_symbols na spacje
+		$str = strtr($str, $comm_bad_symbols, str_pad('', strlen($comm_bad_symbols), ' '));	// zamienia $comm_bad_symbols na spacje
 		$str = mb_strtolower($str);
 		$arr = explode(' ', $str);
 
@@ -729,6 +731,7 @@ class Comm
 	 */
 	public static function prepare_query_string($s, $return_assoc = false, $sanitize = false, $sort = true)
 	{
+		global $comm_bad_symbols;
 		$s = str_replace(['"', '\'', '~', '`', '<', '>', '|'], ' ', strip_tags($s));    // Usówamy niebezpieczne znaki
 		if ($sanitize) $s = filter_var($s, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$s = mb_strtolower($s);
@@ -736,7 +739,7 @@ class Comm
 		// Usówamy znaki gdy obejmują wyrazy
 		$arr2 = [];
 		foreach ($arr1 as $w) {
-			$wy = trim($w, self::BAD_SYMBOLS);
+			$wy = trim($w, $comm_bad_symbols);
 			if (!empty($wy)) $arr2[] = $wy;
 		}
 		// Gdy co najmniej 2 wyrazy to kasuje wyrazy jedno znakowe
@@ -849,10 +852,10 @@ class Comm
 	public static function highlight($search, $text)
 	{
 		if (strlen($text) < 2 || strlen($search) < 2) return $text;
-
+		global $comm_accent2ascii;
 		$popular_accent = ['a', 'c', 'e', 'l', 'n', 'o', 's', 'u', 'z', 'A', 'C', 'E', 'L', 'N', 'O', 'S', 'U', 'Z'];
 
-		foreach (self::ACCENT2ASCII as $accent => $latin) if (in_array($latin, $popular_accent)) $arrLatin[$latin][] = $accent;
+		foreach($comm_accent2ascii as $accent => $latin) if (in_array($latin, $popular_accent)) $arrLatin[$latin][] = $accent;
 		foreach ($arrLatin as $latin => $arr) $arrLatin[$latin][] = $latin;
 		foreach ($arrLatin as $latin => $arr) {
 			$trans2['__'.(ord($latin) - 64).'__'] = '['.implode('', $arr).']';
@@ -917,7 +920,7 @@ class Comm
 	public static function magicstr_gen()
 	{
 		$time = time();
-		$hash = substr(sha1($time.self::SALT_MAGIC), 0, 7);
+		$hash = substr(sha1($time . COMM_SALT_MAGIC), 0, 7);
 		$time_36 = base_convert($time, 10, 36);
 
 		return $hash.$time_36;
@@ -932,12 +935,12 @@ class Comm
 	 */
 	public static function magicstr_test($magic, $time_min = self::MAGICSTR_MINTIME, $time_max = self::MAGICSTR_MAXTIME)
 	{
-		$hash = substr($magic, 0, 7);    // pierwsze 7 znaków to hash z time.self::SALT_MAGIC
+		$hash = substr($magic, 0, 7);    // pierwsze 7 znaków to hash z time . COMM_SALT_MAGIC
 		$time36 = substr($magic, 7);    // reszta time zakodowany o podstawie 36
 
 		$time_from36 = base_convert($time36, 36, 10);	// time rozkodowany z podstawy 36 do 10
 
-		$hash_new = substr(sha1($time_from36.self::SALT_MAGIC), 0, 7);
+		$hash_new = substr(sha1($time_from36 . COMM_SALT_MAGIC), 0, 7);
 		if ($hash != $hash_new) return false;
 
 		$time_new = time();
@@ -964,10 +967,10 @@ class Comm
 	 * Generuje zakodowany ciąg z zawartością $body i hash do weryfikacji poprawności
 	 * używany np. do autologowania
 	 */
-	public static function strhash_gen($body, $salt = self::SALT_STRHASH)
+	public static function strhash_gen($body, $salt = SALT_STRHASH)
 	{
 		$month = date('F');
-		$token = substr(sha1($salt.$month.$body), 0, Comm::SALT_STRHASH_LEN);
+		$token = substr(sha1($salt.$month.$body), 0, self::SALT_STRHASH_LEN);
 		$hash = self::encode(json_encode(['t' => $token, 'b' => $body], JSON_UNESCAPED_UNICODE));
 		return $hash;
 	}
@@ -975,7 +978,7 @@ class Comm
 	/**
 	 * Testuje zakodowany ciąg $crypt wyciąga z niego zawartość body i prawidłowość zawartego hash'a
 	 */
-	public static function strhash_test($crypt, $salt = self::SALT_STRHASH)
+	public static function strhash_test($crypt, $salt = COMM_SALT_STRHASH)
 	{
 		$data = self::decode($crypt);
 		if (!$data) return ['success' => false, 'body' => ''];
@@ -984,7 +987,7 @@ class Comm
 		if (empty($arr['t']) || empty($arr['b'])) return ['success' => false, 'body' => ''];
 
 		$month = date('F');
-		$test_token = substr(sha1($salt.$month.$arr['b']), 0, Comm::SALT_STRHASH_LEN);
+		$test_token = substr(sha1($salt.$month.$arr['b']), 0, self::SALT_STRHASH_LEN);
 		$success = ($arr['t'] == $test_token);
 		return ['success' => $success, 'body' => $arr['b']];
 	}
@@ -1141,18 +1144,26 @@ class Comm
 		$html_link_styles = '';
 		if ($link_styles) {
 			foreach ($link_styles as $style_path) {
-				$html_link_styles .= '<link rel="stylesheet" href="' . $style_path . '">' . PHP_EOL;
+				$html_link_styles .= '<link rel="stylesheet" href="' . $style_path . '">' . LF;
 			}
 		}
 
-		return '<!doctype html>' . PHP_EOL . '<html lang="' . $lang . '">' . PHP_EOL . '<head>' . PHP_EOL .
-			'<meta charset="UTF-8">' . PHP_EOL . '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">' . PHP_EOL .
-			'<meta http-equiv="X-UA-Compatible" content="ie=edge">' . PHP_EOL .
-			'<title>' . htmlspecialchars($title) . '</title>' . PHP_EOL .
-			($bootstrap5 ? '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">' : '') . PHP_EOL .
-			(!empty($link_styles)?$html_link_styles:'') . PHP_EOL .
-			(!empty($style)?('<style>' . $style . '</style>'):'') . PHP_EOL .
-			'</head>' . PHP_EOL . '<body>';
+		return '<!doctype html>' . LF . '<html lang="' . $lang . '">' . LF . '<head>' . LF .
+			'<meta charset="UTF-8">' . LF . '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">' . LF .
+			'<meta http-equiv="X-UA-Compatible" content="ie=edge">' . LF .
+			'<title>' . htmlspecialchars($title) . '</title>' . LF .
+			($bootstrap5 ? '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">' : '') . LF .
+			(!empty($link_styles)?$html_link_styles:'') . LF .
+			(!empty($style)?('<style>' . $style . '</style>'):'') . LF .
+			'</head>' . LF . '<body>';
+	}
+}
+
+if (!function_exists('intdiv')) {
+	function intdiv($a, $b) {
+		if ($b == 0) throw new Exception('Division by zero');
+		if ($b == -1 && $a == PHP_INT_MIN) throw new Exception('ArithmeticError');
+		return (int)(($a - $a % $b) / $b);
 	}
 }
 

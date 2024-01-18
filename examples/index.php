@@ -5,9 +5,9 @@
  * @author  Andrzej Mazur <eznawca@gmail.com>
  */
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-use Eznawca\Comm\Comm;
+//use Eznawca\Comm\Comm;
 
 echo <<<CSS
 <style>

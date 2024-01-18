@@ -91,7 +91,7 @@ if (!function_exists('fdiv')) {
 	/**
 	 * fdiv — Divides two numbers, according to IEEE 754
 	 */
-	function fdiv(float $dividend, float $divisor): float {
+	function fdiv($dividend, $divisor) {
 		if ($dividend == 0 && $divisor == 0) return NAN;
 		if ($dividend == INF && $divisor == INF) return NAN;
 
